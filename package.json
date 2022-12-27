@@ -5,7 +5,7 @@
     "license": "MIT",
     "scripts": {
         "dev": "ts-node engine.ts",
-        "test": "jest"
+        "test": "jest --verbose"
     },
     "dependencies": {
         "typescript": "^4.9.4"

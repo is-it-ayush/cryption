@@ -1,6 +1,8 @@
 ### Cryption
 
-**"Cryption"** is a higher level wrapper around the `crypto.subtle` API. It provides some convenience methods for encrypting and decrypting data for your regular developer to understand in his daily life. It just works. : )
+**"Cryption"** is a lightweight, higher level wrapper around the `crypto.subtle` API. It provides some convenient function's by wrapping low-level Subtle API for an average regular developer like me to understand & use cryptography in daily life project's. It just works. : )
+
+>Note: This library is **still in development**. It is not ready for production use. *Please use it at your own risk.*
 
 ### Development
 

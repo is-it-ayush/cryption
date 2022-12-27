@@ -1,5 +1,5 @@
 import { generateAESKey, encryptAES, decryptAES } from "../core/symmetric";
-import { export_symmetric_key, fromBufferTo } from "../helpers/utils";
+import { export_symmetric_key, convertFromTo } from "../helpers/utils";
 import * as crypto from "crypto";
 
 describe("Symmetric Algorithms Test", () => {
@@ -20,8 +20,8 @@ describe("Symmetric Algorithms Test", () => {
             const encrypted = await encryptAES(key, text, "AES-GCM", iv);
             const decrypted = await decryptAES(key, encrypted, "AES-GCM", iv);
 
-            const encryptedText = await fromBufferTo(encrypted, "base64");
-            const decryptedText = await fromBufferTo(decrypted, "utf8");
+            const encryptedText = await convertFromTo(encrypted, "base64");
+            const decryptedText = await convertFromTo(decrypted, "utf8");
 
 
             expect(encryptedText).toBeDefined();
@@ -46,8 +46,8 @@ describe("Symmetric Algorithms Test", () => {
             const encrypted = await encryptAES(key, text, "AES-CBC", iv);
             const decrypted = await decryptAES(key, encrypted, "AES-CBC", iv);
 
-            const encryptedText = await fromBufferTo(encrypted, "base64");
-            const decryptedText = await fromBufferTo(decrypted, "utf8");
+            const encryptedText = await convertFromTo(encrypted, "base64");
+            const decryptedText = await convertFromTo(decrypted, "utf8");
 
             expect(encryptedText).toBeDefined();
             expect(decryptedText).toBeDefined();
@@ -71,8 +71,8 @@ describe("Symmetric Algorithms Test", () => {
             const encrypted = await encryptAES(key, text, "AES-CTR", undefined, counter);
             const decrypted = await decryptAES(key, encrypted, "AES-CTR", undefined, counter);
 
-            const encryptedText = await fromBufferTo(encrypted, "base64");
-            const decryptedText = await fromBufferTo(decrypted, "utf8");
+            const encryptedText = await convertFromTo(encrypted, "base64");
+            const decryptedText = await convertFromTo(decrypted, "utf8");
 
             expect(encryptedText).toBeDefined();
             expect(decryptedText).toBeDefined();

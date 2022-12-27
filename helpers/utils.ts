@@ -11,7 +11,7 @@ export async function exportKey(key: crypto.webcrypto.CryptoKey, format: ExportK
     return exportedKey;
 }
 
-export async function fromBufferTo(buffer: ArrayBuffer, mode: BufferConversion) {
+export async function convertFromTo(buffer: ArrayBuffer, mode: BufferConversion) {
     const result = await Buffer.from(buffer).toString(mode);
     return result;
 }
@@ -22,8 +22,8 @@ export async function export_asymmetric_keys(keys: crypto.webcrypto.CryptoKeyPai
     const exportedPrivateKey = await exportKey(keys.privateKey, "pkcs8"); // returns ArrayBuffer
     // To Base64: This is the format that is used in the .pem files
     const convertedKey = {
-        publicKey: await fromBufferTo(exportedPublicKey, "base64"), // returns string
-        privateKey: await fromBufferTo(exportedPrivateKey, "base64") // returns string
+        publicKey: await convertFromTo(exportedPublicKey, "base64"), // returns string
+        privateKey: await convertFromTo(exportedPrivateKey, "base64") // returns string
     }
 
     return convertedKey;
@@ -31,7 +31,7 @@ export async function export_asymmetric_keys(keys: crypto.webcrypto.CryptoKeyPai
 
 export async function export_symmetric_key(key: crypto.webcrypto.CryptoKey) {
     const exportedKey = await exportKey(key, "raw");
-    const convertedKey = await fromBufferTo(exportedKey, "base64");
+    const convertedKey = await convertFromTo(exportedKey, "base64");
     return convertedKey;
 }
 

@@ -1,5 +1,5 @@
 import { generateRSAOEAPKeyPair, encryptRSAOAEP, decryptRSAOAEP } from "../core/asymmetric";
-import { export_asymmetric_keys, fromBufferTo } from "../helpers/utils";
+import { export_asymmetric_keys, convertFromTo } from "../helpers/utils";
 
 describe("Asymmetric Algorithms Test", () => {
 
@@ -17,8 +17,8 @@ describe("Asymmetric Algorithms Test", () => {
         const encrypted = await encryptRSAOAEP(keypair.publicKey, text);
         const decrypted = await decryptRSAOAEP(keypair.privateKey, encrypted);
 
-        const encryptedText = await fromBufferTo(encrypted, "base64");
-        const decryptedText = await fromBufferTo(decrypted, "utf8");
+        const encryptedText = await convertFromTo(encrypted, "base64");
+        const decryptedText = await convertFromTo(decrypted, "utf8");
 
         expect(encryptedText).toBeDefined();
         expect(decryptedText).toBeDefined();

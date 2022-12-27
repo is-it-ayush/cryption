@@ -5,7 +5,7 @@ describe("Symmetric Algorithms Test", () => {
 
     describe("AES-GCM", () => {
 
-        test("AES-GCM Key Generation and Base64 Conversion", async () => {
+        test("AES-GCM Key Generation and Export To Base64", async () => {
             const key = await generateAESKey(256, true, 'AES-GCM');
             const exportedKey = await export_symmetric_key(key);
             expect(exportedKey).toBeDefined();
@@ -27,5 +27,6 @@ describe("Symmetric Algorithms Test", () => {
             expect(decryptedText).toBeDefined();
             expect(decryptedText).toBe(text);
         });
+
     });
 });

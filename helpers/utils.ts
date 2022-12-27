@@ -1,20 +1,30 @@
 import * as crypto from 'crypto';
-import { type KeyFormatType } from './utils';
+import type { ExportKeyFormat, BufferConversion, Algorithm } from './utils.d';
 
-export async function arrayBufferToBase64(buffer: ArrayBuffer) {
-    const base64 = Buffer.from(buffer).toString('base64');
-    return base64;
-}
 
-export async function base64ToArrayBuffer(base64: string) {
-    const buffer = Buffer.from(base64, 'base64');
-    return buffer;
-}
-
-export async function exportKey(key: crypto.webcrypto.CryptoKey, format: KeyFormatType) {
-
+export async function exportKey(key: crypto.webcrypto.CryptoKey, format: ExportKeyFormat) {
+    // If the key is not extractable, we can't export it
+    if (!key.extractable) {
+        throw new Error("The key's are not extractable. If you want to export them, set the extractable flag to true while generating a Key Pair.");
+    }
     const exportedKey = await crypto.subtle.exportKey(format, key);
     return exportedKey;
 }
 
-export async function encry 
+export async function fromBufferTo(buffer: ArrayBuffer, mode: BufferConversion) {
+    const result = await Buffer.from(buffer).toString(mode);
+    return result;
+}
+
+export async function extractKeysToBase64(keys: crypto.webcrypto.CryptoKeyPair) {
+
+    const exportedPublicKey = await exportKey(keys.publicKey, "spki"); // returns ArrayBuffer
+    const exportedPrivateKey = await exportKey(keys.privateKey, "pkcs8"); // returns ArrayBuffer
+    // To Base64: This is the format that is used in the .pem files
+    const convertedKey = {
+        publicKey: await fromBufferTo(exportedPublicKey, "base64"), // returns string
+        privateKey: await fromBufferTo(exportedPrivateKey, "base64") // returns string
+    }
+
+    return convertedKey;
+}

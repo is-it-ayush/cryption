@@ -16,7 +16,7 @@ export async function fromBufferTo(buffer: ArrayBuffer, mode: BufferConversion) 
     return result;
 }
 
-export async function extractKeysToBase64(keys: crypto.webcrypto.CryptoKeyPair) {
+export async function export_asymmetric_keys(keys: crypto.webcrypto.CryptoKeyPair) {
 
     const exportedPublicKey = await exportKey(keys.publicKey, "spki"); // returns ArrayBuffer
     const exportedPrivateKey = await exportKey(keys.privateKey, "pkcs8"); // returns ArrayBuffer
@@ -28,3 +28,10 @@ export async function extractKeysToBase64(keys: crypto.webcrypto.CryptoKeyPair) 
 
     return convertedKey;
 }
+
+export async function export_symmetric_key(key: crypto.webcrypto.CryptoKey) {
+    const exportedKey = await exportKey(key, "raw");
+    const convertedKey = await fromBufferTo(exportedKey, "base64");
+    return convertedKey;
+}
+

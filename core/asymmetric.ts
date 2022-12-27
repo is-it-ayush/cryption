@@ -1,6 +1,15 @@
 import * as crypto from "crypto";
+import { allowedRSAOEAPSizes, allowedRSAOEAPHashes } from "../helpers/constants";
 
 export async function generateRSAOEAPKeyPair(size: number = 2048, hash: string = "SHA-256", extractable: boolean = true) {
+
+    if (!allowedRSAOEAPSizes.includes(size)) {
+        throw new Error("The size of the key must be 512, 1024, 2048, 4096 or 8192 bits. You provided size: " + size + " bits.");
+    }
+
+    if (!allowedRSAOEAPHashes.includes(hash)) {
+        throw new Error("The hash algorithm must be SHA-1, SHA-256, SHA-384 or SHA-512. You provided hash: " + hash + ".");
+    }
 
     const keyPair = await crypto.subtle.generateKey({
         name: "RSA-OAEP",

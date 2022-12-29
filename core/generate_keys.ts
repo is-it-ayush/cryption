@@ -51,8 +51,15 @@ export async function generate_hmac_key(hash: string = 'SHA-256') {
 }
 
 
+/**
+ * A function to return a RSA-OAEP key pair with the given size and hash algorithm.
+ * @param size This is the size of the key. Default is 2048 bits. You can use 512, 1024, 2048, 4096 or 8192 bits.
+ * @param hash This is the hash algorithm to use. Default is SHA-256. You can use SHA-1, SHA-256, SHA-384 or SHA-512.
+ * @param extractable A boolean to set the key as extractable or not. Default is true.
+ * @returns A Promise with the key.
+ */
 
-export async function generateRSAOEAPKeyPair(size: number = 2048, hash: string = "SHA-256", extractable: boolean = true) {
+export async function generate_rsa_oeap_key_pair(size: number = 2048, hash: string = "SHA-256", extractable: boolean = true) {
 
     if (!allowedRSAOEAPSizes.includes(size)) {
         throw new Error("The size of the key must be 512, 1024, 2048, 4096 or 8192 bits. You provided size: " + size + " bits.");

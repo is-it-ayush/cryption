@@ -1,18 +1,18 @@
 import { encryptRSAOAEP, decryptRSAOAEP } from "../core/rsa_oaep";
-import { generateRSAOEAPKeyPair } from "../core/generate_keys";
+import { generate_rsa_oeap_key_pair } from "../core/generate_keys";
 import { export_asymmetric_keys, convertFromTo } from "../helpers/utils";
 
 describe("RSA-OAEP Test", () => {
 
     test("RSA-OAEP Key Generation and Export To Base64", async () => {
-        const keypair = await generateRSAOEAPKeyPair(2048, 'SHA-256', true);
+        const keypair = await generate_rsa_oeap_key_pair(2048, 'SHA-256', true);
         const exportedKeyPair = await export_asymmetric_keys(keypair);
         expect(exportedKeyPair.publicKey).toBeDefined();
         expect(exportedKeyPair.privateKey).toBeDefined();
 
     });
     test("RSA-OAEP Encryption and Decryption with Text", async () => {
-        const keypair = await generateRSAOEAPKeyPair(2048, 'SHA-256', true);
+        const keypair = await generate_rsa_oeap_key_pair(2048, 'SHA-256', true);
         const text = "Hello World";
 
         const encrypted = await encryptRSAOAEP(keypair.publicKey, text);

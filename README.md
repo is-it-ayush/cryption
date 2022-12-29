@@ -2,6 +2,8 @@
 
 ### Cryption
 
+> `yarn add @is-it-ayush/cryption`
+
 **"Cryption"** is a lightweight, higher level wrapper around the `crypto.subtle` API. It provides some convenient function's by wrapping low-level Subtle API for an average regular developer like me to understand & use cryptography in daily life project's. It just works. : )
 
 >Note: **DO NOT USE THIS IN PRODUCTION**. This library is **still in development** and is an alpha stage. *If you intend to use it, please do so at your own risk.*. I'm not responsible for bringing your prod down. : )
@@ -36,6 +38,8 @@ You're also welcome to open an issue if you find any bug or have any suggestion 
 | :white_check_mark: | Key derivation                         |          PBKDF2, HKDF, SCRYPT           |       -        |
 | :white_check_mark: | Key generation.                        |             AES, HMAC, RSA              | ECDSA, RSA-PSS |
 |         🛋️          | Got More Ideas? Write an [issue].      |                   AES                   |       -        |
+
+I've plans to make it a lot easier with syntax such as `cryption.keys.generate` and `cryption.encrypt.aes`. I'll also add support for more algorithms. 💙
 
 ### Heartbeat
 

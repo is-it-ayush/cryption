@@ -1,4 +1,4 @@
-import { convertFromTo, export_symmetric_key, export_asymmetric_keys, exportKey } from "../helpers/utils";
+import { convertFromTo, export_symmetric_key, export_asymmetric_keys, exportKey, generate_iv } from "../helpers/utils";
 import { decryptAES, encryptAES } from "./aes";
 import { generate_aes_key, generate_rsa_oeap_key_pair, generate_hmac_key } from "./generate_keys";
 import { decryptRSAOAEP, encryptRSAOAEP } from "./rsa_oaep";
@@ -33,6 +33,7 @@ export class Cryption {
     // Utils
     public export_symmetric_key = export_symmetric_key.bind(this);
     public export_asymmetric_key = export_asymmetric_keys.bind(this);
+    public generate_iv = generate_iv.bind(this);
     private convertFromTo = convertFromTo.bind(this);
     private exportKey = exportKey.bind(this);
 }

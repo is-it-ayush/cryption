@@ -35,3 +35,7 @@ export async function export_symmetric_key(key: crypto.webcrypto.CryptoKey) {
     return convertedKey;
 }
 
+export async function generate_iv(length: number) {
+    const iv = await crypto.randomBytes(length);
+    return iv;
+}

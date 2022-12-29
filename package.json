@@ -20,7 +20,10 @@
         "type": "git",
         "url": "https://github.com/is-it-ayush/cryption"
     },
-    "main": "index.js",
+    "bugs": {
+        "url": "https://github.com/is-it-ayush/cryption/issues"
+    },
+    "main": "index.ts",
     "license": "MIT",
     "scripts": {
         "dev": "ts-node engine.ts",

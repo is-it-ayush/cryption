@@ -1,18 +1,6 @@
 import * as crypto from "crypto";
 import { SymmetricAlgorithms } from "../helpers/utils.d";
 
-export async function generateAESKey(size: number = 256, extractable: boolean = true, algorithm: SymmetricAlgorithms) {
-
-    if (size !== 128 && size !== 192 && size !== 256) {
-        throw new Error("The size of the key must be 128, 192 or 256 bits. You provided size: " + size + " bits.");
-    }
-    const key = await crypto.subtle.generateKey({
-        name: algorithm,
-        length: size,
-    }, extractable, ["encrypt", "decrypt"]);
-
-    return key;
-}
 
 export async function encryptAES(key: crypto.webcrypto.CryptoKey, data: string, algorithm: SymmetricAlgorithms, iv?: ArrayBuffer, counter?: ArrayBuffer) {
 

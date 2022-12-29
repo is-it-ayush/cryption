@@ -1,28 +1,30 @@
 import * as crypto from 'crypto';
-import { generatehmac, verifyhmac } from '../core/mac';
-import { generateAESKey } from '../core/symmetric';
+import { sign_with, verify_with } from '../core/digital_signatures';
+import { generate_hmac_key } from '../core/generate_keys';
 import { export_symmetric_key } from '../helpers/utils';
 
-describe('Message Authentication Code Test', () => {
-    test('Generate HMAC', async () => {
-        const keydata = await generateAESKey(256, true, 'AES-GCM');
-        const key = await export_symmetric_key(keydata);
-        const data = 'Hello World';
-        const hmac = generatehmac(key, data);
-        expect(hmac).toBeDefined();
+describe('Digital Signature Test', () => {
+
+    describe('HMAC Test', () => {
+        test('Generate HMAC Key', async () => {
+            const keydata = await generate_hmac_key();
+            const key = await export_symmetric_key(keydata);
+            expect(key).toBeDefined();
+        });
+
+        test('Verify HMAC Signature ', async () => {
+            const keydata = await generate_hmac_key();
+
+            const data = Buffer.from(new String('Hello World'));
+            const signature = await sign_with(keydata, data, 'hmac')
+            const is_verified = await verify_with(keydata, data, 'hmac', Buffer.from(signature));
+            expect(is_verified).toBeTruthy();
+
+            const data_2 = Buffer.from(new String('Hello World, again. The verification should fail i.e. is_verified_2 should be false.'));
+            const is_verified_2 = await verify_with(keydata, data_2, 'hmac', Buffer.from(signature), 'sha256');
+            console.log(`Signature: ${signature} | is_verified: ${is_verified}  | data: ${data}`)
+            expect(is_verified_2).toBeFalsy();
+        });
     });
 
-    test('Verify HMAC', async () => {
-        const keydata = await generateAESKey(256, true, 'AES-GCM');
-        const key = await export_symmetric_key(keydata);
-
-        const data = 'Hello World';
-        const hmac = await generatehmac(key, data);
-        const verified = await verifyhmac(key, data, hmac);
-        expect(verified).toBeTruthy();
-
-        const data2 = 'Hello World2';
-        const verified2 = await verifyhmac(key, data2, hmac); // should be false because data2 is different
-        expect(verified2).toBeFalsy();
-    });
 });

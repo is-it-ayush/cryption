@@ -1,7 +1,8 @@
-import { generateRSAOEAPKeyPair, encryptRSAOAEP, decryptRSAOAEP } from "../core/asymmetric";
+import { encryptRSAOAEP, decryptRSAOAEP } from "../core/rsa_oaep";
+import { generateRSAOEAPKeyPair } from "../core/generate_keys";
 import { export_asymmetric_keys, convertFromTo } from "../helpers/utils";
 
-describe("Asymmetric Algorithms Test", () => {
+describe("RSA-OAEP Test", () => {
 
     test("RSA-OAEP Key Generation and Export To Base64", async () => {
         const keypair = await generateRSAOEAPKeyPair(2048, 'SHA-256', true);

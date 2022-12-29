@@ -17,9 +17,9 @@ yarn add @is-it-ayush/cryption
 Now, you have installed the package. Now, you need to import it in your project. You can do this by running the following command in your terminal:
 
 ```js
-const cryption = require("@is-it-ayush/cryption");
+const cryption = require("@isitayush/cryption");
 # or
-import cryption from "@is-it-ayush/cryption";
+import cryption from "@isitayush/cryption";
 ```
 
 You can name it whatever you want. I named it `cryption` for this example. Now, you can use it in your project. You will now be able to use the functions in the package. I'll write a guide on how to use the functions in the package soon. For now, the only documentation available is the `auto-complete`  and `tests`. Please check them in-case you need help or [tweet](https://twitter.com/is_it_ayush) me. I'll try to make a better documentation soon.
@@ -75,7 +75,7 @@ Before you publish, you need to
 
 - Add a `README.md` file. This is the file that will be shown on the npm website. 
 - Add a `LICENSE` file. This is the file that will be shown on the npm website.
-- Make sure you have a `name` and `version` in your `package.json` file. This is the file that will be shown on the npm website explaining everything inside your project. Add a `description` and `keywords` if you want to. 
+- Make sure you have a `name` and `version` in your `package.json` file. This is the file that will be shown on the npm website explaining everything inside your project. Add a `description` and `keywords` if you want to.
 - Also make sure you have a `repository` and `author` in your `package.json` file. The repository is the link to your project on GitHub. The author is your name. This information will be shown on the npm website.
 
 
@@ -99,10 +99,35 @@ yarn link my-first-package
 Once you're sure about your hard work and you're really your code won't bring down production. You can publish your package. You can do this by running the following command in your terminal:
 
 ```bash
-npm publish
-# or
-yarn publish
+npm publish --access public
 ```
+
+### FAQ
+#### How to update your package?
+
+You can update your package by running the following command in your terminal:
+
+```bash
+npm version patch
+# or
+yarn version patch
+```
+
+#### I get an error when I try to publish my package.
+
+You need to login to npm. You can do this by running the following command in your terminal:
+
+```bash
+npm login
+# or
+yarn login
+```
+
+#### I get an `out-of-scope` error when i run `npm publish`.
+
+Please check your name. I was stuck in a similar situation. I resolved the error by changing the package name to my npm username followed by my username. For example, I changed `@is-it-ayush/cryption` to `@isitayush/cryption`. You can do the same.
+Also, make sure you are logged in, don't have a .npmrc file (unless you're in a organization) and you have a valid package.json file.
+This should fix it. : )
 
 ### Conclusion
 

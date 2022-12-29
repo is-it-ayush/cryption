@@ -1,8 +1,16 @@
 import * as crypto from "crypto";
 import { SymmetricAlgorithms } from "../helpers/utils.d";
 
-
-export async function encryptAES(key: crypto.webcrypto.CryptoKey, data: string, algorithm: SymmetricAlgorithms, iv?: ArrayBuffer, counter?: ArrayBuffer) {
+/**
+ * A function to encrypt data with AES.
+ * @param key The key to use for the encryption. You can use a secret symmetric key.
+ * @param data The data to encrypt. It must be a Buffer.
+ * @param algorithm The algorithm to use. Default is AES-CBC. You can use AES-CBC, AES-CTR, AES-GCM.
+ * @param iv If the algorithm is AES-CBC or AES-GCM, you must provide an IV.
+ * @param counter If the algorithm is AES-CTR, you must provide a counter.
+ * @returns A Promise with the encrypted data.
+ */
+export async function encryptAES(key: crypto.webcrypto.CryptoKey, data: Buffer, algorithm: SymmetricAlgorithms, iv?: ArrayBuffer, counter?: ArrayBuffer) {
 
     // Validation of the parameters
     if (!key || !data || !algorithm) {
@@ -22,14 +30,14 @@ export async function encryptAES(key: crypto.webcrypto.CryptoKey, data: string, 
         encrypted = await crypto.subtle.encrypt({
             name: algorithm,
             iv: iv,
-        }, key, Buffer.from(data));
+        }, key, data);
     }
     else if (counter) {
         encrypted = await crypto.subtle.encrypt({
             name: algorithm,
             counter: counter,
             length: 128
-        }, key, Buffer.from(data));
+        }, key, data);
     } else {
         // Ideally, this should never happen because of the validation above. Still, it's here just in case.
         throw new Error("You must provide an IV or a counter for the " + algorithm + " algorithm.");
@@ -38,6 +46,15 @@ export async function encryptAES(key: crypto.webcrypto.CryptoKey, data: string, 
     return encrypted;
 }
 
+/**
+ * A function to decrypt data with AES.
+ * @param key The key to use for the decryption. You must use the same secret key that was used to encrypt the data.
+ * @param data The data to decrypt. It must be an ArrayBuffer.
+ * @param algorithm The algorithm to use. Default is AES-CBC. You can use AES-CBC, AES-CTR, AES-GCM.
+ * @param iv If the algorithm is AES-CBC or AES-GCM, you must provide an IV.
+ * @param counter If the algorithm is AES-CTR, you must provide a counter.
+ * @returns A Promise with the decrypted data.
+ */
 export async function decryptAES(key: crypto.webcrypto.CryptoKey, data: ArrayBuffer, algorithm: SymmetricAlgorithms, iv?: ArrayBuffer, counter?: ArrayBuffer) {
 
     // Validation of the parameters

@@ -16,7 +16,7 @@ describe("AES Test: All Supported", () => {
         test("AES-GCM Encryption and Decryption with Text", async () => {
             const iv = crypto.getRandomValues(new Uint8Array(96));
             const key = await generate_aes_key(256, true, 'AES-GCM');
-            const text = "Hello World";
+            const text = Buffer.from("Hello World");
 
             const encrypted = await encryptAES(key, text, "AES-GCM", iv);
             const decrypted = await decryptAES(key, encrypted, "AES-GCM", iv);
@@ -27,7 +27,7 @@ describe("AES Test: All Supported", () => {
 
             expect(encryptedText).toBeDefined();
             expect(decryptedText).toBeDefined();
-            expect(decryptedText).toBe(text);
+            expect(decryptedText).toBe(text.toString('utf-8'));
         });
     });
     describe("AES-CBC", () => {
@@ -42,7 +42,7 @@ describe("AES Test: All Supported", () => {
         test("AES-CBC Encryption and Decryption with Text", async () => {
             const iv = crypto.getRandomValues(new Uint8Array(16));
             const key = await generate_aes_key(256, true, 'AES-CBC');
-            const text = "Hello World";
+            const text = Buffer.from("Hello World");
 
             const encrypted = await encryptAES(key, text, "AES-CBC", iv);
             const decrypted = await decryptAES(key, encrypted, "AES-CBC", iv);
@@ -52,7 +52,7 @@ describe("AES Test: All Supported", () => {
 
             expect(encryptedText).toBeDefined();
             expect(decryptedText).toBeDefined();
-            expect(decryptedText).toBe(text);
+            expect(decryptedText).toBe(text.toString('utf-8'));
 
         });
     });
@@ -67,7 +67,7 @@ describe("AES Test: All Supported", () => {
         test("AES-CTR Encryption and Decryption with Text", async () => {
             const counter = crypto.getRandomValues(new Uint8Array(16));
             const key = await generate_aes_key(256, true, 'AES-CTR');
-            const text = "Hello World";
+            const text = Buffer.from("Hello World");
 
             const encrypted = await encryptAES(key, text, "AES-CTR", undefined, counter);
             const decrypted = await decryptAES(key, encrypted, "AES-CTR", undefined, counter);
@@ -77,8 +77,7 @@ describe("AES Test: All Supported", () => {
 
             expect(encryptedText).toBeDefined();
             expect(decryptedText).toBeDefined();
-            expect(decryptedText).toBe(text);
-
+            expect(decryptedText).toBe(text.toString('utf-8'));
         });
     });
 });

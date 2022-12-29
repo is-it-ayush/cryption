@@ -17,16 +17,7 @@ I built this as it's too hard to scroll the docs for my fellow [grug](https://gr
 
 ### Contribution
 
-- Fork the repository.
-- Create a new branch.
-- Make your changes.
-- Create a pull request.
-- Wait for the review.
-- Make changes if required.
-- I merge your pull request if everything is fine.
-- Congratulations!! You've just contributed to this repository. You are now a **proud contributor**. : )
-
-You're also welcome to open an issue if you find any bug or have any suggestion for improvement.
+Please read the [CONTRIBUTING.md](CONTRIBUTING.md) file for submitting pull requests to the project. If you want to become a maintainer, drop me a message on twitter [@is_it_ayush](https://twitter.com/is_it_ayush). I will add you as a maintainer. Thank You! I appreciate your help in improving the quality of the documentation and code and the repository. 💙
 
 ### Roadmap
 
@@ -39,7 +30,7 @@ You're also welcome to open an issue if you find any bug or have any suggestion 
 | :white_check_mark: | Key generation.                        |             AES, HMAC, RSA              | ECDSA, RSA-PSS |
 |         🛋️          | Got More Ideas? Write an [issue].      |                   AES                   |       -        |
 
-I've plans to make it a lot easier with syntax such as `cryption.keys.generate` and `cryption.encrypt.aes`. I'll also add support for more algorithms. 💙
+I've plans to make it a lot easier with syntax such as `cryption.keys.generate` and `cryption.encrypt.aes`. I'll also add support for more algorithms. Contributions, Suggestions, Tips, Ideas are always heartily welcome. : )
 
 ### Heartbeat
 

@@ -6,7 +6,7 @@ async function main() {
     // An example of how to use the library using AES-GCM.
     const my_string = "Hello World";
 
-    const my_iv = await cryption.generate_iv(96);
+    const my_iv = await cryption.helpers.random.iv(96);
     const my_key = await cryption.aes.generate_key(256, true, 'AES-GCM');
 
     const encrypted_buffer = await cryption.aes.encrypt(my_key, Buffer.from(my_string), 'AES-GCM', my_iv);

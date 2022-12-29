@@ -8,15 +8,18 @@ import { sign_with, verify_with } from "./digital_signatures";
 // This class is used to export all the functions from the core folder to the main index.ts file
 export class Cryption {
 
-
-    // AES-GCM
+    /**
+     * Symmetric Encryption. AES-GCM, AES-CBC, AES-CTR supported.
+     */
     public aes = {
         generate_key: generate_aes_key.bind(this),
         encrypt: encrypt_aes.bind(this),
         decrypt: decrypt_aes.bind(this),
     }
 
-    // RSA-OAEP
+    /**
+     * Asymmetric Encryption. RSA-OAEP supported.
+     */
     public rsa = {
         oaep: {
             generate_key_pair: generate_rsa_oeap_key_pair.bind(this),
@@ -25,28 +28,43 @@ export class Cryption {
         }
     }
 
-    //HMAC
+    /**
+     * HMAC. SHA-256, SHA-384, SHA-512 supported.
+     */
     public hmac = {
         generate_key: generate_hmac_key.bind(this),
     }
 
-    // Key Derivation
+    /**
+     * Key Derivation. PBKDF2, HKDF, Scrypt supported.
+     * Recommended to use PBKDF2 if you're using to generate password hashes in your application.
+     */
     public derive_key = {
         pbkdf2: pbkdf2.bind(this),
         hkdf: hkdf.bind(this),
         scrypt: scrypt.bind(this)
     }
 
-    // Digital Signatures
+    /**
+     * Digital Signatures are used to verify the authenticity of a message.
+     * HMAC, RSASSA-PKCS1-v1_5, ECDSA, RSA-PSS supported.
+     */
     public signature = {
         sign: sign_with.bind(this),
         verify: verify_with.bind(this)
     }
 
     // Utils
-    public export_symmetric_key = export_symmetric_key.bind(this);
-    public export_asymmetric_key = export_asymmetric_keys.bind(this);
-    public generate_iv = generate_iv.bind(this);
+    public helpers = {
+        export: {
+            symmetric_key: export_symmetric_key.bind(this),
+            asymmetric_key: export_asymmetric_keys.bind(this),
+        },
+        random: {
+            iv: generate_iv.bind(this),
+        }
+    }
+
     private convertFromTo = convertFromTo.bind(this);
     private exportKey = exportKey.bind(this);
 }

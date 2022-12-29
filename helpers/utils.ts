@@ -35,6 +35,12 @@ export async function export_symmetric_key(key: crypto.webcrypto.CryptoKey) {
     return convertedKey;
 }
 
+
+/**
+ * Generates a random IV. The length of the IV is dependent on the algorithm it'll be used for.
+ * @param length The length of the IV in bits.
+ * @returns The IV in the form of a Buffer.
+ */
 export async function generate_iv(length: number) {
     const iv = await crypto.randomBytes(length);
     return iv;

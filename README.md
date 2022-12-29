@@ -2,7 +2,7 @@
 
 ### Cryption
 
-> `yarn add @is-it-ayush/cryption`
+> `yarn add @isitayush/cryption`
 
 **"Cryption"** is a lightweight, higher level wrapper around the `crypto.subtle` API. It provides some convenient function's by wrapping low-level Subtle API for an average regular developer like me to understand & use cryptography in daily life project's. It just works. : )
 
@@ -43,7 +43,7 @@ I've plans to make it a lot easier with syntax such as `cryption.keys.generate` 
 
 ### Heartbeat
 
-Roadmap was last updated on **29/12/2022 6:26 PM GMT**.
+Roadmap was last updated on **30/12/2022 10:47 pm GMT**.
 > Note: This is a personal project and I'm not working on it full-time. I'll try to work on it in my free time. : )
 
 ### License

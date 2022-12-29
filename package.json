@@ -1,10 +1,7 @@
 {
-    "name": "@is-it-ayush/cryption",
+    "name": "@isitayush/cryption",
     "version": "0.0.1-alpha",
-    "author": {
-        "name": "Ayush Gupta",
-        "email": "ayush.keshav2004@gmail.com"
-    },
+    "author": "Ayush Gupta <ayush.keshav2004@gmail.com>",
     "description": "Cryption provides a higher level wrapper around crypto.subtle API.",
     "keywords": [
         "cryption",
@@ -18,7 +15,7 @@
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/is-it-ayush/cryption"
+        "url": "git+https://github.com/is-it-ayush/cryption.git"
     },
     "bugs": {
         "url": "https://github.com/is-it-ayush/cryption/issues"
@@ -27,7 +24,8 @@
     "license": "MIT",
     "scripts": {
         "dev": "ts-node engine.ts",
-        "test": "jest --verbose"
+        "test": "jest --verbose",
+        "publish": "npm publish --access public"
     },
     "dependencies": {
         "typescript": "^4.9.4"

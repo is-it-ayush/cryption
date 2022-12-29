@@ -1,4 +1,4 @@
-import cryption from "@is-it-ayush/cryption";
+import cryption from '@isitayush/cryption';
 import { assert } from "console";
 
 async function main() {

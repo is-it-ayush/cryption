@@ -40,6 +40,7 @@ You're also welcome to open an issue if you find any bug or have any suggestion 
 ### Heartbeat
 
 Roadmap was last updated on **29/12/2022 6:26 PM GMT**.
+> Note: This is a personal project and I'm not working on it full-time. I'll try to work on it in my free time. : )
 
 ### License
 

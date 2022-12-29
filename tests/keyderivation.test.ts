@@ -1,6 +1,6 @@
 import * as crypto from "crypto";
 import { convertFromTo } from "../helpers/utils";
-import { deriveKeyWithPBKDF2, deriveKeyWithScrypt, deriveKeyWithHKDF } from "../core/key_derivation";
+import { pbkdf2, scrypt, hkdf } from "../core/key_derivation";
 
 describe("Key Derivation Test", () => {
 
@@ -13,7 +13,7 @@ describe("Key Derivation Test", () => {
             const keylen = 32;
             const digest = 'sha256';
 
-            const derivedKey = await deriveKeyWithPBKDF2(password, salt, iterations, keylen, digest, 'base64');
+            const derivedKey = await pbkdf2(password, salt, iterations, keylen, digest, 'base64');
             expect(derivedKey).toBeDefined();
         });
 
@@ -24,8 +24,8 @@ describe("Key Derivation Test", () => {
             const keylen = 32;
             const digest = 'sha256';
 
-            const derivedKey = await deriveKeyWithPBKDF2(password, salt, iterations, keylen, digest, 'base64');
-            const rehashedKey = await deriveKeyWithPBKDF2(password, salt, iterations, keylen, digest, 'base64');
+            const derivedKey = await pbkdf2(password, salt, iterations, keylen, digest, 'base64');
+            const rehashedKey = await pbkdf2(password, salt, iterations, keylen, digest, 'base64');
             expect(derivedKey).toEqual(rehashedKey);
         });
     });
@@ -35,7 +35,7 @@ describe("Key Derivation Test", () => {
             const salt = crypto.getRandomValues(new Uint8Array(16)).toString();
             const keylen = 32;
 
-            const derivedKey = await deriveKeyWithScrypt(password, salt, keylen, 'base64');
+            const derivedKey = await scrypt(password, salt, keylen, 'base64');
             expect(derivedKey).toBeDefined();
         });
         test("Scrypt Derivation and ReHash Test", async () => {
@@ -43,8 +43,8 @@ describe("Key Derivation Test", () => {
             const salt = crypto.getRandomValues(new Uint8Array(16)).toString();
             const keylen = 32;
 
-            const derivedKey = await deriveKeyWithScrypt(password, salt, keylen, 'base64');
-            const rehashedKey = await deriveKeyWithScrypt(password, salt, keylen, 'base64');
+            const derivedKey = await scrypt(password, salt, keylen, 'base64');
+            const rehashedKey = await scrypt(password, salt, keylen, 'base64');
             expect(derivedKey).toEqual(rehashedKey);
 
         });
@@ -55,7 +55,7 @@ describe("Key Derivation Test", () => {
             const salt = crypto.getRandomValues(new Uint8Array(16)).toString();
             const keylen = 32;
 
-            const derivedKey = await deriveKeyWithHKDF(password, salt, keylen, 'base64');
+            const derivedKey = await hkdf(password, salt, keylen, 'base64');
             expect(derivedKey).toBeDefined();
         });
         test("HKDF Derivation and ReHash Test", async () => {
@@ -63,8 +63,8 @@ describe("Key Derivation Test", () => {
             const salt = crypto.getRandomValues(new Uint8Array(16)).toString();
             const keylen = 32;
 
-            const derivedKey = await deriveKeyWithHKDF(password, salt, keylen, 'base64');
-            const rehashedKey = await deriveKeyWithHKDF(password, salt, keylen, 'base64');
+            const derivedKey = await hkdf(password, salt, keylen, 'base64');
+            const rehashedKey = await hkdf(password, salt, keylen, 'base64');
             expect(derivedKey).toEqual(rehashedKey);
         });
     });

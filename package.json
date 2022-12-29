@@ -5,10 +5,6 @@
         "name": "Ayush Gupta",
         "email": "ayush.keshav2004@gmail.com"
     },
-    "categories": [
-        "Other",
-        "Security"
-    ],
     "description": "Cryption provides a higher level wrapper around crypto.subtle API.",
     "keywords": [
         "cryption",

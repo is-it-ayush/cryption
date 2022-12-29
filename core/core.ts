@@ -1,5 +1,5 @@
 import { convertFromTo, export_symmetric_key, export_asymmetric_keys, exportKey, generate_iv } from "../helpers/utils";
-import { decryptAES, encryptAES } from "./aes";
+import { decrypt_aes, encrypt_aes } from "./aes";
 import { generate_aes_key, generate_rsa_oeap_key_pair, generate_hmac_key } from "./generate_keys";
 import { decryptRSAOAEP, encryptRSAOAEP } from "./rsa_oaep";
 import { pbkdf2, hkdf, scrypt } from "./key_derivation";
@@ -10,8 +10,8 @@ export class Cryption {
 
     // AES
     public generate_aes_key = generate_aes_key.bind(this);
-    public encryptAES = encryptAES.bind(this);
-    public decryptAES = decryptAES.bind(this);
+    public encrypt_aes = encrypt_aes.bind(this);
+    public decrypt_aes = decrypt_aes.bind(this);
 
     // RSA
     public generate_rsa_oaep_key_pair = generate_rsa_oeap_key_pair.bind(this);

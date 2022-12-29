@@ -10,7 +10,7 @@ import { SymmetricAlgorithms } from "../helpers/utils.d";
  * @param counter If the algorithm is AES-CTR, you must provide a counter.
  * @returns A Promise with the encrypted data.
  */
-export async function encryptAES(key: crypto.webcrypto.CryptoKey, data: Buffer, algorithm: SymmetricAlgorithms, iv?: ArrayBuffer, counter?: ArrayBuffer) {
+export async function encrypt_aes(key: crypto.webcrypto.CryptoKey, data: Buffer, algorithm: SymmetricAlgorithms, iv?: ArrayBuffer, counter?: ArrayBuffer) {
 
     // Validation of the parameters
     if (!key || !data || !algorithm) {
@@ -55,7 +55,7 @@ export async function encryptAES(key: crypto.webcrypto.CryptoKey, data: Buffer, 
  * @param counter If the algorithm is AES-CTR, you must provide a counter.
  * @returns A Promise with the decrypted data.
  */
-export async function decryptAES(key: crypto.webcrypto.CryptoKey, data: ArrayBuffer, algorithm: SymmetricAlgorithms, iv?: ArrayBuffer, counter?: ArrayBuffer) {
+export async function decrypt_aes(key: crypto.webcrypto.CryptoKey, data: ArrayBuffer, algorithm: SymmetricAlgorithms, iv?: ArrayBuffer, counter?: ArrayBuffer) {
 
     // Validation of the parameters
     if (!key || !data || !algorithm) {

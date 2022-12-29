@@ -1,4 +1,4 @@
-[issue]: /issues
+[issue]: ../issues/new
 
 ### Cryption
 

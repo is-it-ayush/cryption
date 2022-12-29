@@ -1,1 +1,0 @@
-console.log(`This will be a package in the future. For now, it's just a file. :)`);

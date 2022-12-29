@@ -1,6 +1,29 @@
 {
     "name": "@is-it-ayush/cryption",
-    "version": "1.0.0",
+    "version": "0.0.1-alpha",
+    "author": {
+        "name": "Ayush Gupta",
+        "email": "ayush.keshav2004@gmail.com"
+    },
+    "categories": [
+        "Other",
+        "Security"
+    ],
+    "description": "Cryption provides a higher level wrapper around crypto.subtle API.",
+    "keywords": [
+        "cryption",
+        "crypto",
+        "encryption",
+        "decryption",
+        "hashing",
+        "rsa",
+        "pbkdf2",
+        "aes"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/is-it-ayush/cryption"
+    },
     "main": "index.js",
     "license": "MIT",
     "scripts": {

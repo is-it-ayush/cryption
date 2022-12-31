@@ -9,7 +9,7 @@ describe("AES Test: All Supported", () => {
 
         test("AES-GCM Key Generation and Export To Base64", async () => {
             const key = await generate_aes_key(256, true, 'AES-GCM');
-            const exportedKey = await export_symmetric_key(key);
+            const exportedKey = await export_symmetric_key(key, "base64");
             expect(exportedKey).toBeDefined();
         });
 
@@ -21,8 +21,8 @@ describe("AES Test: All Supported", () => {
             const encrypted = await encrypt_aes(key, text, "AES-GCM", iv);
             const decrypted = await decrypt_aes(key, encrypted, "AES-GCM", iv);
 
-            const encryptedText = await convertFromTo(encrypted, "base64");
-            const decryptedText = await convertFromTo(decrypted, "utf8");
+            const encryptedText = await convertFromTo("base64", encrypted);
+            const decryptedText = await convertFromTo("utf8", decrypted);
 
 
             expect(encryptedText).toBeDefined();
@@ -34,7 +34,7 @@ describe("AES Test: All Supported", () => {
 
         test("AES-CBC Key Generation and Export To Base64", async () => {
             const key = await generate_aes_key(256, true, 'AES-CBC');
-            const exportedKey = await export_symmetric_key(key);
+            const exportedKey = await export_symmetric_key(key, "base64");
             expect(exportedKey).toBeDefined();
 
         });
@@ -47,8 +47,8 @@ describe("AES Test: All Supported", () => {
             const encrypted = await encrypt_aes(key, text, "AES-CBC", iv);
             const decrypted = await decrypt_aes(key, encrypted, "AES-CBC", iv);
 
-            const encryptedText = await convertFromTo(encrypted, "base64");
-            const decryptedText = await convertFromTo(decrypted, "utf8");
+            const encryptedText = await convertFromTo("base64", encrypted);
+            const decryptedText = await convertFromTo("utf8", decrypted);
 
             expect(encryptedText).toBeDefined();
             expect(decryptedText).toBeDefined();
@@ -60,7 +60,7 @@ describe("AES Test: All Supported", () => {
 
         test("AES-CTR Key Generation and Export To Base64", async () => {
             const key = await generate_aes_key(256, true, 'AES-CTR');
-            const exportedKey = await export_symmetric_key(key);
+            const exportedKey = await export_symmetric_key(key, "base64");
             expect(exportedKey).toBeDefined();
         });
 
@@ -72,8 +72,8 @@ describe("AES Test: All Supported", () => {
             const encrypted = await encrypt_aes(key, text, "AES-CTR", undefined, counter);
             const decrypted = await decrypt_aes(key, encrypted, "AES-CTR", undefined, counter);
 
-            const encryptedText = await convertFromTo(encrypted, "base64");
-            const decryptedText = await convertFromTo(decrypted, "utf8");
+            const encryptedText = await convertFromTo("base64", encrypted);
+            const decryptedText = await convertFromTo("utf8", decrypted);
 
             expect(encryptedText).toBeDefined();
             expect(decryptedText).toBeDefined();

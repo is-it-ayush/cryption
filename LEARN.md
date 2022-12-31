@@ -7,9 +7,9 @@ I know, you have question's on how I built this. Well, I'm here to answer them! 
 First, you need to install the package. You can do this by running the following command in your terminal:
 
 ```bash
-npm install @is-it-ayush/cryption
+npm install @isitayush/cryption
 # or
-yarn add @is-it-ayush/cryption
+yarn add @isitayush/cryption
 ```
 
 ## How to use

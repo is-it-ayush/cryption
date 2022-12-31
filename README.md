@@ -10,6 +10,17 @@
 
 I built this as it's too hard to scroll the docs for my fellow [grug](https://grugbrain.dev/) developer's. : )
 
+### How to use
+
+```js
+const cryption = require("@isitayush/cryption");
+// or
+import cryption from "@isitayush/cryption";
+```
+
+```js
+
+
 ### Development
 
 - `yarn install` to install all dependencies.

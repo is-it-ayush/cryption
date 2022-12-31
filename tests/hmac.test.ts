@@ -8,7 +8,7 @@ describe('Digital Signature Test', () => {
     describe('HMAC Test', () => {
         test('Generate HMAC Key', async () => {
             const keydata = await generate_hmac_key();
-            const key = await export_symmetric_key(keydata);
+            const key = await export_symmetric_key(keydata, "base64");
             expect(key).toBeDefined();
         });
 
@@ -21,7 +21,7 @@ describe('Digital Signature Test', () => {
             expect(is_verified).toBeTruthy();
 
             const data_2 = Buffer.from(new String('Hello World, again. The verification should fail i.e. is_verified_2 should be false.'));
-            const is_verified_2 = await verify_with(keydata, data_2, 'hmac', Buffer.from(signature), 'sha256');
+            const is_verified_2 = await verify_with(keydata, data_2, 'hmac', Buffer.from(signature));
             console.log(`Signature: ${signature} | is_verified: ${is_verified}  | data: ${data}`)
             expect(is_verified_2).toBeFalsy();
         });

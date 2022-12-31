@@ -7,6 +7,8 @@ export type Algorithm = crypto.webcrypto.AlgorithmIdentifier | crypto.webcrypto.
 
 export type SymmetricAlgorithms = "AES-CBC" | "AES-CTR" | "AES-GCM";
 
+export type HashType = "SHA-1"| "SHA-256" | "SHA-384" | "SHA-512";
+
 
 // Key Derivation Digest Constants
 export type DigestPBKDF = 'sha256' | 'sha512' | 'sha1' | 'md5' | 'rmd160';

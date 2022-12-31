@@ -1,4 +1,4 @@
-import { convertFromTo, export_symmetric_key, export_asymmetric_keys, exportKey, generate_iv } from "../helpers/utils";
+import { convertFromTo, export_symmetric_key, export_asymmetric_keys, exportKey, generate_iv, generate_salt } from "../helpers/utils";
 import { decrypt_aes, encrypt_aes } from "./aes";
 import { generate_aes_key, generate_rsa_oeap_key_pair, generate_hmac_key } from "./generate_keys";
 import { decryptRSAOAEP, encryptRSAOAEP } from "./rsa_oaep";
@@ -10,6 +10,8 @@ export class Cryption {
 
     /**
      * Symmetric Encryption. AES-GCM, AES-CBC, AES-CTR supported.
+     * Recommended to use AES-GCM if you're using to encrypt data in your application.
+     * The default algorithm is AES-CBC. An `iv` is required for AES-CBC and AES-GCM.
      */
     public aes = {
         generate_key: generate_aes_key.bind(this),
@@ -54,17 +56,24 @@ export class Cryption {
         verify: verify_with.bind(this)
     }
 
-    // Utils
+    /**
+     * These are the helper function that you can use to convert buffers, generate random values, etc.
+     */
     public helpers = {
         export: {
-            symmetric_key: export_symmetric_key.bind(this),
-            asymmetric_key: export_asymmetric_keys.bind(this),
+            keys: {
+                symmetric: export_symmetric_key.bind(this),
+                asymmetric: export_asymmetric_keys.bind(this),
+            },
         },
         random: {
             iv: generate_iv.bind(this),
+            salt: generate_salt.bind(this),
+        },
+        buffer: {
+            to: convertFromTo.bind(this),
         }
     }
 
-    private convertFromTo = convertFromTo.bind(this);
     private exportKey = exportKey.bind(this);
 }

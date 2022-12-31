@@ -8,7 +8,7 @@ describe("Key Derivation Test", () => {
 
         test("PBKDF2 Key Derivation: SHA256", async () => {
             const password = "Hello World";
-            const salt = crypto.getRandomValues(new Uint8Array(16)).toString();
+            const salt = Buffer.from(crypto.getRandomValues(new Uint8Array(16)));
             const iterations = 10000;
             const keylen = 32;
             const digest = 'sha256';
@@ -19,7 +19,7 @@ describe("Key Derivation Test", () => {
 
         test("PBKDF2 Derivation and ReHash Test", async () => {
             const password = "Hello World";
-            const salt = crypto.getRandomValues(new Uint8Array(16)).toString();
+            const salt = Buffer.from(crypto.getRandomValues(new Uint8Array(16)));
             const iterations = 10000;
             const keylen = 32;
             const digest = 'sha256';
@@ -32,7 +32,7 @@ describe("Key Derivation Test", () => {
     describe("Scrypt", () => {
         test("Scrypt Key Derivation", async () => {
             const password = "Hello World";
-            const salt = crypto.getRandomValues(new Uint8Array(16)).toString();
+            const salt = Buffer.from(crypto.getRandomValues(new Uint8Array(16)));
             const keylen = 32;
 
             const derivedKey = await scrypt(password, salt, keylen, 'base64');
@@ -40,7 +40,7 @@ describe("Key Derivation Test", () => {
         });
         test("Scrypt Derivation and ReHash Test", async () => {
             const password = "Hello World";
-            const salt = crypto.getRandomValues(new Uint8Array(16)).toString();
+            const salt = Buffer.from(crypto.getRandomValues(new Uint8Array(16)));
             const keylen = 32;
 
             const derivedKey = await scrypt(password, salt, keylen, 'base64');
@@ -52,7 +52,7 @@ describe("Key Derivation Test", () => {
     describe("HKDF", () => {
         test("HKDF Key Derivation", async () => {
             const password = "Hello World";
-            const salt = crypto.getRandomValues(new Uint8Array(16)).toString();
+            const salt = Buffer.from(crypto.getRandomValues(new Uint8Array(16)));
             const keylen = 32;
 
             const derivedKey = await hkdf(password, salt, keylen, 'base64');
@@ -60,7 +60,7 @@ describe("Key Derivation Test", () => {
         });
         test("HKDF Derivation and ReHash Test", async () => {
             const password = "Hello World";
-            const salt = crypto.getRandomValues(new Uint8Array(16)).toString();
+            const salt = Buffer.from(crypto.getRandomValues(new Uint8Array(16)));
             const keylen = 32;
 
             const derivedKey = await hkdf(password, salt, keylen, 'base64');

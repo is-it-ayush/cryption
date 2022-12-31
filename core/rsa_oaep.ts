@@ -1,6 +1,14 @@
 import * as crypto from "crypto";
 
-export async function encryptRSAOAEP(key: crypto.webcrypto.CryptoKey, data: string) {
+
+
+/**
+ * Use this function to encrypt data with RSA-OAEP.
+ * @param key The key to use for the encryption. It must be a `crypto.webcrypto.CryptoKey`.
+ * @param data The data to encrypt. It must be an `ArrayBuffer`.
+ * @returns A Promise with the encrypted data of type `ArrayBuffer`.
+ */
+export async function encryptRSAOAEP(key: crypto.webcrypto.CryptoKey, data: Buffer) {
 
     if (!data || !key) {
         throw new Error("The are missing parameters. The key or data were not found as an argument. ");
@@ -8,11 +16,16 @@ export async function encryptRSAOAEP(key: crypto.webcrypto.CryptoKey, data: stri
 
     const encrypted = await crypto.subtle.encrypt({
         name: "RSA-OAEP"
-    }, key, Buffer.from(data));
+    }, key, data);
     return encrypted;
 }
 
-// 
+/**
+ * Use this function to decrypt data with RSA-OAEP.
+ * @param key The key to use for the decryption. It must be a `crypto.webcrypto.CryptoKey`.
+ * @param data The data to decrypt. It must be an `ArrayBuffer`.
+ * @returns A Promise with the decrypted data of type `ArrayBuffer`.
+ */
 export async function decryptRSAOAEP(key: crypto.webcrypto.CryptoKey, data: ArrayBuffer) {
 
     if (!data || !key) {

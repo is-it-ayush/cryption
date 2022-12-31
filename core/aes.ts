@@ -6,21 +6,21 @@ import { SymmetricAlgorithms } from "../helpers/utils.d";
  * @param key The key to use for the encryption. You can use a secret symmetric key.
  * @param data The data to encrypt. It must be a Buffer.
  * @param algorithm The algorithm to use. Default is AES-CBC. You can use AES-CBC, AES-CTR, AES-GCM.
- * @param iv If the algorithm is AES-CBC or AES-GCM, you must provide an IV.
+ * @param iv If the algorithm is AES-CBC (default) or AES-GCM, you must provide an IV.
  * @param counter If the algorithm is AES-CTR, you must provide a counter.
  * @returns A Promise with the encrypted data.
  */
-export async function encrypt_aes(key: crypto.webcrypto.CryptoKey, data: Buffer, algorithm: SymmetricAlgorithms, iv?: ArrayBuffer, counter?: ArrayBuffer) {
+export async function encrypt_aes(key: crypto.webcrypto.CryptoKey, data: Buffer, algorithm: SymmetricAlgorithms = "AES-CBC", iv?: ArrayBuffer, counter?: ArrayBuffer) {
 
     // Validation of the parameters
-    if (!key || !data || !algorithm) {
+    if (!key || !data) {
         throw new Error("You must provide a key and data to encrypt. There are missing parameters.");
     }
 
     if (!iv && (algorithm === "AES-CBC" || algorithm === "AES-GCM")) {
         throw new Error("You must provide an IV for the " + algorithm + " algorithm.");
     }
-    if (!counter && algorithm === "AES-CTR") {
+    else if (!counter && algorithm === "AES-CTR") {
         throw new Error("You must provide a counter for the " + algorithm + " algorithm.");
     }
 
@@ -51,21 +51,22 @@ export async function encrypt_aes(key: crypto.webcrypto.CryptoKey, data: Buffer,
  * @param key The key to use for the decryption. You must use the same secret key that was used to encrypt the data.
  * @param data The data to decrypt. It must be an ArrayBuffer.
  * @param algorithm The algorithm to use. Default is AES-CBC. You can use AES-CBC, AES-CTR, AES-GCM.
- * @param iv If the algorithm is AES-CBC or AES-GCM, you must provide an IV.
+ * @param iv If the algorithm is AES-CBC (default) or AES-GCM, you must provide an IV.
  * @param counter If the algorithm is AES-CTR, you must provide a counter.
  * @returns A Promise with the decrypted data.
  */
-export async function decrypt_aes(key: crypto.webcrypto.CryptoKey, data: ArrayBuffer, algorithm: SymmetricAlgorithms, iv?: ArrayBuffer, counter?: ArrayBuffer) {
+export async function decrypt_aes(key: crypto.webcrypto.CryptoKey, data: ArrayBuffer, algorithm: SymmetricAlgorithms = "AES-CBC", iv?: ArrayBuffer, counter?: ArrayBuffer) {
 
     // Validation of the parameters
-    if (!key || !data || !algorithm) {
+    if (!key || !data) {
         throw new Error("You must provide a key and data to decrypt. There are missing parameters.");
     }
 
+    // Validation Conditions
     if (!iv && (algorithm === "AES-CBC" || algorithm === "AES-GCM")) {
         throw new Error("You must provide an IV for the " + algorithm + " algorithm.");
     }
-    if (!counter && algorithm === "AES-CTR") {
+    else if (!counter && algorithm === "AES-CTR") {
         throw new Error("You must provide a counter for the " + algorithm + " algorithm.");
     }
 

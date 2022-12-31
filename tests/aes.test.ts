@@ -1,6 +1,6 @@
-import { generate_aes_key } from "../core/generate_keys";
-import { encrypt_aes, decrypt_aes } from "../core/aes";
-import { export_symmetric_key, convertFromTo } from "../helpers/utils";
+import { generate_aes_key } from "../src/generate_keys";
+import { encrypt_aes, decrypt_aes } from "../src/aes";
+import { export_symmetric_key, convertFromTo } from "../src/helpers/utils";
 import * as crypto from "crypto";
 
 describe("AES Test: All Supported", () => {

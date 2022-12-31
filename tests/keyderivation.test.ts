@@ -1,6 +1,6 @@
 import * as crypto from "crypto";
-import { convertFromTo } from "../helpers/utils";
-import { pbkdf2, scrypt, hkdf } from "../core/key_derivation";
+import { convertFromTo } from "../src/helpers/utils";
+import { pbkdf2, scrypt, hkdf } from "../src/key_derivation";
 
 describe("Key Derivation Test", () => {
 

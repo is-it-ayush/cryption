@@ -1,7 +1,6 @@
 import * as crypto from 'crypto';
 import type { ExportKeyFormat, BufferConversion, Algorithm } from './utils.d';
 
-
 /**
  * Use this function to export a key to a ArrayBuffer in a specified format.
  * @param key The key to use for the encryption. It must be a CryptoKey.
@@ -11,7 +10,9 @@ import type { ExportKeyFormat, BufferConversion, Algorithm } from './utils.d';
 export async function exportKey(key: crypto.webcrypto.CryptoKey, format: ExportKeyFormat) {
     // If the key is not extractable, we can't export it
     if (!key.extractable) {
-        throw new Error("The key's are not extractable. If you want to export them, set the extractable flag to true while generating a Key Pair.");
+        throw new Error(
+            "The key's are not extractable. If you want to export them, set the extractable flag to true while generating a Key Pair.",
+        );
     }
     const exportedKey = await crypto.subtle.exportKey(format, key);
     return exportedKey;
@@ -32,17 +33,16 @@ export async function convertFromTo(mode: BufferConversion, data: ArrayBuffer) {
  * Use this function to export both the public and private key of a Key Pair in string of the specified mode.
  * @param keys The Key Pair to export. It must be of CryptoKeyPair Type.'
  * @param mode The mode to convert the keys to. You can choose between "base64", "hex" and "utf8" and "binary".
- * @returns A Promise with object `{publicKey: string, privateKey: string}` in the specified mode. 
+ * @returns A Promise with object `{publicKey: string, privateKey: string}` in the specified mode.
  */
 export async function export_asymmetric_keys(keys: crypto.webcrypto.CryptoKeyPair, mode: BufferConversion) {
-
-    const exportedPublicKey = await exportKey(keys.publicKey, "spki"); // returns ArrayBuffer
-    const exportedPrivateKey = await exportKey(keys.privateKey, "pkcs8"); // returns ArrayBuffer
+    const exportedPublicKey = await exportKey(keys.publicKey, 'spki'); // returns ArrayBuffer
+    const exportedPrivateKey = await exportKey(keys.privateKey, 'pkcs8'); // returns ArrayBuffer
     // To Base64: This is the format that is used in the .pem files
     const convertedKey = {
         publicKey: await convertFromTo(mode, exportedPublicKey), // returns string
-        privateKey: await convertFromTo(mode, exportedPrivateKey) // returns string
-    }
+        privateKey: await convertFromTo(mode, exportedPrivateKey), // returns string
+    };
 
     return convertedKey;
 }
@@ -53,11 +53,10 @@ export async function export_asymmetric_keys(keys: crypto.webcrypto.CryptoKeyPai
  * @returns A Promise with the key in the specified mode as a string.
  */
 export async function export_symmetric_key(key: crypto.webcrypto.CryptoKey, mode: BufferConversion) {
-    const exportedKey = await exportKey(key, "raw");
+    const exportedKey = await exportKey(key, 'raw');
     const convertedKey = await convertFromTo(mode, exportedKey);
     return convertedKey;
 }
-
 
 /**
  * Generates a random IV. The length of the IV is dependent on the algorithm it'll be used for.

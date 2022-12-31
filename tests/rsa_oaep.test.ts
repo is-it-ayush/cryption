@@ -1,6 +1,6 @@
-import { encryptRSAOAEP, decryptRSAOAEP } from "../core/rsa_oaep";
-import { generate_rsa_oeap_key_pair } from "../core/generate_keys";
-import { export_asymmetric_keys, convertFromTo } from "../helpers/utils";
+import { encryptRSAOAEP, decryptRSAOAEP } from "../src/rsa_oaep";
+import { generate_rsa_oeap_key_pair } from "../src/generate_keys";
+import { export_asymmetric_keys, convertFromTo } from "../src/helpers/utils";
 
 describe("RSA-OAEP Test", () => {
 

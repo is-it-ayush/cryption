@@ -1,3 +1,9 @@
+### 0.0.6-alpha
+
+- [x] Added prettier, formatting, tags and other stuff that will help in development and ship better code.
+- [x] Fixed the issue where the library won't work and gave error in any react based projects. (It was because I wasn't really shipping the `dist` folder but the `src` folder. My bad.)
+- [x] Added Type Definitions for the library.
+
 ### 0.0.5-alpha
 
 - [x] Added a lot more documentation.

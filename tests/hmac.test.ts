@@ -1,7 +1,7 @@
 import * as crypto from 'crypto';
-import { sign_with, verify_with } from '../core/digital_signatures';
-import { generate_hmac_key } from '../core/generate_keys';
-import { export_symmetric_key } from '../helpers/utils';
+import { sign_with, verify_with } from '../src/digital_signatures';
+import { generate_hmac_key } from '../src/generate_keys';
+import { export_symmetric_key } from '../src/helpers/utils';
 
 describe('Digital Signature Test', () => {
 

@@ -4,7 +4,7 @@
 - [x] Improved the default values.
 - [x] More typesafety.
 - [x] Added a `cryption.helpers.random.salt` function. You can use it to generate a random salt. Example: `cryption.helpers.random.salt(16)` will generate a random salt of length 16 bits. Some algorithms require a specific salt length. You can check the google for that.
-- [x] Added better examples in `./how-to-project/index.ts` file. 
+- [x] Added better examples in `./how-to-project/index.ts` file.
 
 ### 0.0.4-alpha
 

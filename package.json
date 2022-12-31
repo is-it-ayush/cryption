@@ -1,6 +1,6 @@
 {
     "name": "@isitayush/cryption",
-    "version": "0.0.4-alpha",
+    "version": "0.0.5-alpha",
     "author": "Ayush Gupta <ayush.keshav2004@gmail.com>",
     "description": "Cryption provides a higher level wrapper around crypto.subtle API.",
     "keywords": [

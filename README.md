@@ -4,7 +4,7 @@
 
 > `yarn add @isitayush/cryption`
 
-**"Cryption"** is a lightweight, higher level wrapper around the `crypto.subtle` API. It provides some convenient function's by wrapping low-level Subtle API for an average regular developer like me to understand & use cryptography in daily life project's. It just works. : )
+**"Cryption"** is a lightweight, higher level wrapper around the `crypto.subtle` API. It provides some convenient function's by wrapping low-level Subtle API for an average regular developer like me to understand & use cryptography in daily life project's. It just works. <3
 
 >Note: **DO NOT USE THIS IN PRODUCTION**. This library is **still in development** and is an alpha stage. *If you intend to use it, please do so at your own risk.*. I'm not responsible for bringing your prod down. : )
 
@@ -12,14 +12,7 @@ I built this as it's too hard to scroll the docs for my fellow [grug](https://gr
 
 ### How to use
 
-```js
-const cryption = require("@isitayush/cryption");
-// or
-import cryption from "@isitayush/cryption";
-```
-
-```js
-
+You can checkout the [examples](./how-to-project/index.ts) folder for examples. I will add more examples in the future.
 
 ### Development
 

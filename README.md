@@ -43,7 +43,7 @@ Roadmap was last updated on **30/12/2022 10:47 pm GMT**.
 
 ### License
 
-This project is licensed under the MIT License, see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License, see the [LICENSE](LICENSE.md) file for details.
 
 ### Sources
 If you want to know more about the `crypto.subtle` API, please check the

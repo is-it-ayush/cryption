@@ -1,6 +1,6 @@
 {
   "name": "@isitayush/cryption",
-  "version": "0.0.7-alpha",
+  "version": "0.0.7",
   "author": "Ayush Gupta <ayush.keshav2004@gmail.com>",
   "description": "Cryption provides a higher level wrapper around crypto.subtle API.",
   "files": [
@@ -35,7 +35,7 @@
     "preversion": "yarn run lint",
     "version": "yarn run format && git add -A src",
     "postversion": "git push && git push --tags",
-    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "format": "prettier --write \"src/**/*.ts\" ",
     "lint": "tslint -p tsconfig.json"
   },
   "dependencies": {},

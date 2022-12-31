@@ -8,14 +8,14 @@ import type { ExportKeyFormat, BufferConversion, Algorithm } from './utils.d';
  * @returns A Promise with the exported key. It will be an ArrayBuffer.
  */
 export async function exportKey(key: crypto.webcrypto.CryptoKey, format: ExportKeyFormat) {
-    // If the key is not extractable, we can't export it
-    if (!key.extractable) {
-        throw new Error(
-            "The key's are not extractable. If you want to export them, set the extractable flag to true while generating a Key Pair.",
-        );
-    }
-    const exportedKey = await crypto.subtle.exportKey(format, key);
-    return exportedKey;
+  // If the key is not extractable, we can't export it
+  if (!key.extractable) {
+    throw new Error(
+      "The key's are not extractable. If you want to export them, set the extractable flag to true while generating a Key Pair.",
+    );
+  }
+  const exportedKey = await crypto.subtle.exportKey(format, key);
+  return exportedKey;
 }
 
 /**
@@ -25,8 +25,8 @@ export async function exportKey(key: crypto.webcrypto.CryptoKey, format: ExportK
  * @returns A Promise with the converted data. It will be a string of the specified mode.
  */
 export async function convertFromTo(mode: BufferConversion, data: ArrayBuffer) {
-    const result = await Buffer.from(data).toString(mode);
-    return result;
+  const result = await Buffer.from(data).toString(mode);
+  return result;
 }
 
 /**
@@ -36,15 +36,15 @@ export async function convertFromTo(mode: BufferConversion, data: ArrayBuffer) {
  * @returns A Promise with object `{publicKey: string, privateKey: string}` in the specified mode.
  */
 export async function export_asymmetric_keys(keys: crypto.webcrypto.CryptoKeyPair, mode: BufferConversion) {
-    const exportedPublicKey = await exportKey(keys.publicKey, 'spki'); // returns ArrayBuffer
-    const exportedPrivateKey = await exportKey(keys.privateKey, 'pkcs8'); // returns ArrayBuffer
-    // To Base64: This is the format that is used in the .pem files
-    const convertedKey = {
-        publicKey: await convertFromTo(mode, exportedPublicKey), // returns string
-        privateKey: await convertFromTo(mode, exportedPrivateKey), // returns string
-    };
+  const exportedPublicKey = await exportKey(keys.publicKey, 'spki'); // returns ArrayBuffer
+  const exportedPrivateKey = await exportKey(keys.privateKey, 'pkcs8'); // returns ArrayBuffer
+  // To Base64: This is the format that is used in the .pem files
+  const convertedKey = {
+    publicKey: await convertFromTo(mode, exportedPublicKey), // returns string
+    privateKey: await convertFromTo(mode, exportedPrivateKey), // returns string
+  };
 
-    return convertedKey;
+  return convertedKey;
 }
 /**
  * Use this function to export a symmetric key. It will return a Promise with the key.
@@ -53,9 +53,9 @@ export async function export_asymmetric_keys(keys: crypto.webcrypto.CryptoKeyPai
  * @returns A Promise with the key in the specified mode as a string.
  */
 export async function export_symmetric_key(key: crypto.webcrypto.CryptoKey, mode: BufferConversion) {
-    const exportedKey = await exportKey(key, 'raw');
-    const convertedKey = await convertFromTo(mode, exportedKey);
-    return convertedKey;
+  const exportedKey = await exportKey(key, 'raw');
+  const convertedKey = await convertFromTo(mode, exportedKey);
+  return convertedKey;
 }
 
 /**
@@ -64,8 +64,8 @@ export async function export_symmetric_key(key: crypto.webcrypto.CryptoKey, mode
  * @returns The IV in the form of a Buffer.
  */
 export async function generate_iv(length: number) {
-    const iv = await crypto.randomBytes(length);
-    return iv;
+  const iv = await crypto.randomBytes(length);
+  return iv;
 }
 /**
  * Generates a random salt. The length of the salt is dependent on the algorithm it'll be used for.
@@ -73,6 +73,6 @@ export async function generate_iv(length: number) {
  * @returns The salt in the form of a Buffer.
  */
 export async function generate_salt(length: number) {
-    const salt = await crypto.randomBytes(length);
-    return salt;
+  const salt = await crypto.randomBytes(length);
+  return salt;
 }

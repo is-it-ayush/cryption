@@ -1,3 +1,7 @@
+### 0.0.7-alpha
+
+- [x] Fixed the issue where the library won't work due to API issue's.
+
 ### 0.0.6-alpha
 
 - [x] Added prettier, formatting, tags and other stuff that will help in development and ship better code.

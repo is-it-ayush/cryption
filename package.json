@@ -1,6 +1,6 @@
 {
   "name": "@isitayush/cryption",
-  "version": "0.0.6-alpha",
+  "version": "0.0.7-alpha",
   "author": "Ayush Gupta <ayush.keshav2004@gmail.com>",
   "description": "Cryption provides a higher level wrapper around crypto.subtle API.",
   "files": [
@@ -24,8 +24,8 @@
     "url": "https://github.com/is-it-ayush/cryption/issues"
   },
   "homepage": "https://github.com/is-it-ayush/cryption#readme",
-  "main": "lib/core.js",
-  "types": "lib/core.d.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "license": "MIT",
   "scripts": {
     "build": "tsc",

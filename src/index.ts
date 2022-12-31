@@ -12,8 +12,8 @@ import { decryptRSAOAEP, encryptRSAOAEP } from './rsa_oaep';
 import { pbkdf2, hkdf, scrypt } from './key_derivation';
 import { sign_with, verify_with } from './digital_signatures';
 
-// This class is used to export all the functions from the core folder to the main index.ts file
-export class Cryption {
+// This class acts as a wrapper around the functions in the other files.
+class Cryption {
     /**
      * Symmetric Encryption. AES-GCM, AES-CBC, AES-CTR supported.
      * Recommended to use AES-GCM if you're using to encrypt data in your application.
@@ -83,3 +83,17 @@ export class Cryption {
 
     private exportKey = convertFromTo.bind(this);
 }
+
+const cryption = new Cryption();
+
+if (typeof window === 'undefined') {
+    throw new Error('@isitayush/cryption is a browser only library. It cannot be used in Node.js.');
+}
+else if (typeof window.crypto === 'undefined') {
+    throw new Error("Are you sure you're on https? It is important for the API for work. Please lookup, on how to enable https for your framework. If you are on https, then your browser doesn't support the Web Crypto API. :<");
+}
+else if (typeof window.crypto.subtle === 'undefined') {
+    throw new Error("Your browser doesn't support the Web Crypto API. :<");
+}
+
+export default cryption;

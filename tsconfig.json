@@ -8,5 +8,5 @@
         "strict": true /* Enable all strict type-checking options. */
     },
     "include": ["src"],
-    "exclude": ["node_modules", "**/__tests__/*"]
+    "exclude": ["node_modules"]
 }

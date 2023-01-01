@@ -11,7 +11,7 @@ export async function encryptRSAOAEP(key: crypto.webcrypto.CryptoKey, data: Buff
     throw new Error('The are missing parameters. The key or data were not found as an argument. ');
   }
 
-  const encrypted = await crypto.subtle.encrypt(
+  const encrypted = await window.crypto.subtle.encrypt(
     {
       name: 'RSA-OAEP',
     },
@@ -32,7 +32,7 @@ export async function decryptRSAOAEP(key: crypto.webcrypto.CryptoKey, data: Arra
     throw new Error('The are missing parameters. The key or data were not found as an argument. ');
   }
 
-  const decrypted = await crypto.subtle.decrypt(
+  const decrypted = await window.crypto.subtle.decrypt(
     {
       name: 'RSA-OAEP',
     },

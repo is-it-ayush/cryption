@@ -41,7 +41,7 @@ export async function sign_with(
       break;
   }
 
-  const signature = await crypto.subtle.sign(alg, key, data);
+  const signature = await window.crypto.subtle.sign(alg, key, data);
   return signature;
 }
 
@@ -87,6 +87,6 @@ export async function verify_with(
       break;
   }
 
-  const result = await crypto.subtle.verify(alg, key, signature, data);
+  const result = await window.crypto.subtle.verify(alg, key, signature, data);
   return result;
 }

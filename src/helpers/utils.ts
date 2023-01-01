@@ -14,7 +14,7 @@ export async function exportKey(key: crypto.webcrypto.CryptoKey, format: ExportK
       "The key's are not extractable. If you want to export them, set the extractable flag to true while generating a Key Pair.",
     );
   }
-  const exportedKey = await crypto.subtle.exportKey(format, key);
+  const exportedKey = await window.crypto.subtle.exportKey(format, key);
   return exportedKey;
 }
 

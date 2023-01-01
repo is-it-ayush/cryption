@@ -5,7 +5,6 @@ import { SymmetricAlgorithms } from './helpers/utils.d';
  * A function to encrypt data with AES.
  * @param key The key to use for the encryption. You can use a secret symmetric key.
  * @param data The data to encrypt. It must be a Buffer.
- * @param algorithm The algorithm to use. Default is AES-CBC. You can use AES-CBC, AES-CTR, AES-GCM.
  * @param iv If the algorithm is AES-CBC (default) or AES-GCM, you must provide an IV.
  * @param counter If the algorithm is AES-CTR, you must provide a counter.
  * @returns A Promise with the encrypted data.
@@ -13,7 +12,6 @@ import { SymmetricAlgorithms } from './helpers/utils.d';
 export async function encrypt_aes(
   key: crypto.webcrypto.CryptoKey,
   data: Buffer,
-  algorithm: SymmetricAlgorithms = 'AES-CBC',
   iv?: ArrayBuffer,
   counter?: ArrayBuffer,
 ) {
@@ -22,27 +20,27 @@ export async function encrypt_aes(
     throw new Error('You must provide a key and data to encrypt. There are missing parameters.');
   }
 
-  if (!iv && (algorithm === 'AES-CBC' || algorithm === 'AES-GCM')) {
-    throw new Error('You must provide an IV for the ' + algorithm + ' algorithm.');
-  } else if (!counter && algorithm === 'AES-CTR') {
-    throw new Error('You must provide a counter for the ' + algorithm + ' algorithm.');
+  if (!iv && (key.algorithm.name === 'AES-CBC' || key.algorithm.name === 'AES-GCM')) {
+    throw new Error('You must provide an IV for the ' + key.algorithm.name + ' algorithm.');
+  } else if (!counter && key.algorithm.name === 'AES-CTR') {
+    throw new Error('You must provide a counter for the ' + key.algorithm.name + ' algorithm.');
   }
 
   // Do the encryption based on the algorithm and the parameters
   let encrypted: ArrayBuffer;
   if (iv) {
-    encrypted = await crypto.subtle.encrypt(
+    encrypted = await window.crypto.subtle.encrypt(
       {
-        name: algorithm,
+        name: key.algorithm.name,
         iv,
       },
       key,
       data,
     );
   } else if (counter) {
-    encrypted = await crypto.subtle.encrypt(
+    encrypted = await window.crypto.subtle.encrypt(
       {
-        name: algorithm,
+        name: key.algorithm.name,
         counter,
         length: 128,
       },
@@ -51,7 +49,7 @@ export async function encrypt_aes(
     );
   } else {
     // Ideally, this should never happen because of the validation above. Still, it's here just in case.
-    throw new Error('You must provide an IV or a counter for the ' + algorithm + ' algorithm.');
+    throw new Error('You must provide an IV or a counter for the ' + key.algorithm.name + ' algorithm.');
   }
 
   return encrypted;
@@ -61,7 +59,6 @@ export async function encrypt_aes(
  * A function to decrypt data with AES.
  * @param key The key to use for the decryption. You must use the same secret key that was used to encrypt the data.
  * @param data The data to decrypt. It must be an ArrayBuffer.
- * @param algorithm The algorithm to use. Default is AES-CBC. You can use AES-CBC, AES-CTR, AES-GCM.
  * @param iv If the algorithm is AES-CBC (default) or AES-GCM, you must provide an IV.
  * @param counter If the algorithm is AES-CTR, you must provide a counter.
  * @returns A Promise with the decrypted data.
@@ -69,7 +66,6 @@ export async function encrypt_aes(
 export async function decrypt_aes(
   key: crypto.webcrypto.CryptoKey,
   data: ArrayBuffer,
-  algorithm: SymmetricAlgorithms = 'AES-CBC',
   iv?: ArrayBuffer,
   counter?: ArrayBuffer,
 ) {
@@ -77,29 +73,29 @@ export async function decrypt_aes(
   if (!key || !data) {
     throw new Error('You must provide a key and data to decrypt. There are missing parameters.');
   }
-
+  
   // Validation Conditions
-  if (!iv && (algorithm === 'AES-CBC' || algorithm === 'AES-GCM')) {
-    throw new Error('You must provide an IV for the ' + algorithm + ' algorithm.');
-  } else if (!counter && algorithm === 'AES-CTR') {
-    throw new Error('You must provide a counter for the ' + algorithm + ' algorithm.');
+  if (!iv && (key.algorithm.name === 'AES-CBC' || key.algorithm.name === 'AES-GCM')) {
+    throw new Error('You must provide an IV for the ' + key.algorithm.name + ' algorithm.');
+  } else if (!counter && key.algorithm.name === 'AES-CTR') {
+    throw new Error('You must provide a counter for the ' + key.algorithm.name + ' algorithm.');
   }
 
   // Do the decryption based on the algorithm and the parameters
   let decrypted: ArrayBuffer;
   if (iv) {
-    decrypted = await crypto.subtle.decrypt(
+    decrypted = await window.crypto.subtle.decrypt(
       {
-        name: algorithm,
+        name: key.algorithm.name,
         iv,
       },
       key,
       data,
     );
   } else {
-    decrypted = await crypto.subtle.decrypt(
+    decrypted = await window.crypto.subtle.decrypt(
       {
-        name: algorithm,
+        name: key.algorithm.name,
         counter,
         length: 128,
       },

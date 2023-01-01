@@ -86,14 +86,14 @@ class Cryption {
 
 const cryption = new Cryption();
 
-if (typeof window === 'undefined') {
-  throw new Error('@isitayush/cryption is a browser only library. It cannot be used in Node.js.');
-} else if (typeof window.crypto === 'undefined') {
-  throw new Error(
-    "Are you sure you're on https? It is important for the API for work. Please lookup, on how to enable https for your framework. If you are on https, then your browser doesn't support the Web Crypto API. :<",
-  );
-} else if (typeof window.crypto.subtle === 'undefined') {
-  throw new Error("Your browser doesn't support the Web Crypto API. :<");
+
+// Check if we're in a browser or in Node.js
+if (typeof global.window !== 'undefined') {
+  if (global.window.location.protocol !== 'https:') {
+    throw new Error("The library @isitayush/cryption relies on `window.crypto.subtle` API which is only available in secure contexts i.e. HTTPS. Please make sure you're on HTTPS. If not, google how to switch to HTTPS for your framework.")
+  } else if (!global.window.crypto) {
+    throw new Error("The library @isitayush/cryption relies on `window.crypto.subtle` API which is not available in your browser. Please use a browser that supports this API.")
+  }
 }
 
 export default cryption;

@@ -19,7 +19,7 @@ export async function generate_aes_key(
   if (size !== 128 && size !== 192 && size !== 256) {
     throw new Error('The size of the key must be 128, 192 or 256 bits. You provided size: ' + size + ' bits.');
   }
-  const key = await crypto.subtle.generateKey(
+  const key = await window.crypto.subtle.generateKey(
     {
       name: algorithm,
       length: size,
@@ -37,7 +37,7 @@ export async function generate_aes_key(
  * @returns crypto.webcrypto.CryptoKey: Returns a key to use for generating digital signatures or verifying digital signatures with HMAC.
  */
 export async function generate_hmac_key(hash: string = 'SHA-256') {
-  const key = await crypto.subtle.generateKey(
+  const key = await window.crypto.subtle.generateKey(
     {
       name: 'HMAC',
       hash: { name: hash },
@@ -72,7 +72,7 @@ export async function generate_rsa_oeap_key_pair(
     throw new Error('The hash algorithm must be SHA-1, SHA-256, SHA-384 or SHA-512. You provided hash: ' + hash + '.');
   }
 
-  const keyPair = await crypto.subtle.generateKey(
+  const keyPair = await window.crypto.subtle.generateKey(
     {
       name: 'RSA-OAEP',
       modulusLength: size,

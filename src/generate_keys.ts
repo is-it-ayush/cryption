@@ -17,7 +17,7 @@ export async function generate_aes_key(
   keyUsages: crypto.webcrypto.KeyUsage[] = ['encrypt', 'decrypt'],
 ) {
   if (size !== 128 && size !== 192 && size !== 256) {
-    throw new Error('The size of the key must be 128, 192 or 256 bits. You provided size: ' + size + ' bits.');
+    throw new DOMException('The size of the key must be 128, 192 or 256 bits. You provided size: ' + size + ' bits.');
   }
   const key = await window.crypto.subtle.generateKey(
     {
@@ -63,13 +63,13 @@ export async function generate_rsa_oeap_key_pair(
   extractable: boolean = true,
 ) {
   if (!allowedRSAOEAPSizes.includes(size)) {
-    throw new Error(
+    throw new DOMException(
       'The size of the key must be 512, 1024, 2048, 4096 or 8192 bits. You provided size: ' + size + ' bits.',
     );
   }
 
   if (!allowedRSAOEAPHashes.includes(hash)) {
-    throw new Error('The hash algorithm must be SHA-1, SHA-256, SHA-384 or SHA-512. You provided hash: ' + hash + '.');
+    throw new DOMException('The hash algorithm must be SHA-1, SHA-256, SHA-384 or SHA-512. You provided hash: ' + hash + '.');
   }
 
   const keyPair = await window.crypto.subtle.generateKey(

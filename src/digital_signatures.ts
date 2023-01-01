@@ -17,7 +17,7 @@ export async function sign_with(
   hash: HashType = 'SHA-256',
   saltLength: number = 32,
 ) {
-  if (!key || !data || !algorithm) throw new Error('There are some missing arguments.');
+  if (!key || !data || !algorithm) throw new DOMException('There are some missing arguments.');
 
   // input validation logic
   let alg;
@@ -63,7 +63,7 @@ export async function verify_with(
   hash: HashType = 'SHA-256',
   saltLength: number = 32,
 ) {
-  if (!key || !data || !algorithm || !signature) throw new Error('There are some missing arguments.');
+  if (!key || !data || !algorithm || !signature) throw new DOMException('There are some missing arguments.');
 
   // input validation logic
   let alg;

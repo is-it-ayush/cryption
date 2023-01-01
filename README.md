@@ -4,7 +4,10 @@
 
 > `yarn add @isitayush/cryption`
 
-**"Cryption"** is a lightweight, higher level wrapper around the `crypto.subtle` API. It provides some convenient function's by wrapping low-level Subtle API for an average regular developer like me to understand & use cryptography in daily life project's. It just works. <3
+**"Cryption"** is a "frontend-only" lightweight, higher level wrapper around the `crypto.subtle` API. It provides some convenient function's by wrapping low-level Subtle API for an average regular developer like me to understand & use cryptography in daily life project's. It just works. <3
+
+- Make sure you're on a HTTPS. In the local-dev environment, you can use [local-ssl-proxy](https://github.com/cameronhunter/local-ssl-proxy) to workaround this issue.
+- This is a browser-only library as it relies on the `crypto.subtle` API. It won't work in Node.js.
 
 >Note: **DO NOT USE THIS IN PRODUCTION**. This library is **still in development** and is an alpha stage. *If you intend to use it, please do so at your own risk.*. I'm not a security expert and I'm not responsible for bringing your prod down. : )
 

@@ -6,9 +6,9 @@ import {
   generate_iv,
   generate_salt,
 } from './helpers/utils';
-import { decrypt_aes, encrypt_aes } from './aes';
+import { decrypt as decrypt_aes, encrypt as encrypt_aes } from './aes';
 import { generate_aes_key, generate_rsa_oeap_key_pair, generate_hmac_key } from './generate_keys';
-import { decryptRSAOAEP, encryptRSAOAEP } from './rsa_oaep';
+import { encrypt as encrypt_rsaoaep, decrypt as decrypt_rsaoaep } from './rsa_oaep';
 import { pbkdf2, hkdf, scrypt } from './key_derivation';
 import { sign_with, verify_with } from './digital_signatures';
 
@@ -31,8 +31,8 @@ class Cryption {
   public rsa = {
     oaep: {
       generate_key_pair: generate_rsa_oeap_key_pair.bind(this),
-      encrypt: encryptRSAOAEP.bind(this),
-      decrypt: decryptRSAOAEP.bind(this),
+      encrypt: encrypt_rsaoaep.bind(this),
+      decrypt: decrypt_rsaoaep.bind(this),
     },
   };
 
@@ -57,7 +57,7 @@ class Cryption {
    * Digital Signatures are used to verify the authenticity of a message.
    * HMAC, RSASSA-PKCS1-v1_5, ECDSA, RSA-PSS supported.
    */
-  public signature = {
+  public signatures = {
     sign: sign_with.bind(this),
     verify: verify_with.bind(this),
   };
@@ -65,34 +65,34 @@ class Cryption {
   /**
    * These are the helper function that you can use to convert buffers, generate random values, etc.
    */
-  public helpers = {
-    export: {
-      keys: {
-        symmetric: export_symmetric_key.bind(this),
-        asymmetric: export_asymmetric_keys.bind(this),
-      },
+  public export = {
+    keys: {
+      symmetric: export_symmetric_key.bind(this),
+      asymmetric: export_asymmetric_keys.bind(this),
     },
-    random: {
-      iv: generate_iv.bind(this),
-      salt: generate_salt.bind(this),
-    },
-    buffer: {
-      to: convertFromTo.bind(this),
-    },
-  };
+  }
+
+  public buffer = {
+    to: convertFromTo.bind(this),
+  }
+
+
+  public random = {
+    iv: generate_iv.bind(this),
+    salt: generate_salt.bind(this),
+  }
 
   private exportKey = convertFromTo.bind(this);
 }
 
 const cryption = new Cryption();
 
-
 // Check if we're in a browser or in Node.js
 if (typeof global.window !== 'undefined') {
   if (global.window.location.protocol !== 'https:') {
-    throw new Error("The library @isitayush/cryption relies on `window.crypto.subtle` API which is only available in secure contexts i.e. HTTPS. Please make sure you're on HTTPS. If not, google how to switch to HTTPS for your framework.")
+    throw new DOMException("@isitayush/cryption: The wrapper relies on `window.crypto.subtle` API which is only available in secure contexts i.e. HTTPS. Please make sure you're on HTTPS. If not, google how to switch to HTTPS for your framework.")
   } else if (!global.window.crypto) {
-    throw new Error("The library @isitayush/cryption relies on `window.crypto.subtle` API which is not available in your browser. Please use a browser that supports this API.")
+    throw new DOMException("@isitayush/cryption: The wrapper relies on `window.crypto.subtle` API which is not available in your browser. Please use a browser that supports this API.")
   }
 }
 

@@ -21,10 +21,10 @@ export async function password_store_in_db() {
     const password = "Hello World";
 
     // We generate a random salt for the user.
-    const salt = await cryption.helpers.random.salt(96); // 96 bits = 12 bytes = 24 characters
+    const salt = await cryption.random.salt(96); // 96 bits = 12 bytes = 24 characters
 
     // We calculate the hash of the password using the salt.
-    const hash = await cryption.derive_key.pbkdf2(password, salt, 100000,);
+    const hash = await cryption.derive.pbkdf2(password, salt, 100000,);
 
     // We store the salt and the hash in the database. Say, salt.hash or salt:hash.
     // But, Since we are using pbkdf2, we also need to store the iterations.
@@ -38,7 +38,7 @@ export async function password_store_in_db() {
     const [salt_from_db, hash_from_db, iterations_from_db] = save_to_db.split(".");
 
     // We calculate the hash of the password using the salt from the database.
-    const hash_of_password = await cryption.derive_key.pbkdf2(password, Buffer.from(hash_from_db), parseInt(iterations_from_db));
+    const hash_of_password = await cryption.derive.pbkdf2(password, Buffer.from(hash_from_db), parseInt(iterations_from_db));
 
     // We compare the hash of the password with the hash from the database.
     assert(hash_of_password === hash_from_db); // If the hashes match, the password is correct, you can login the user.
@@ -56,7 +56,7 @@ export async function encrypt_and_decrypt_string() {
 
     // We will also need an IV for this example.
     // IV stands for Initialization Vector.
-    const iv = await cryption.helpers.random.iv(96); // 96 bits = 12 bytes = 24 characters
+    const iv = await cryption.random.iv(96); // 96 bits = 12 bytes = 24 characters
 
     // We generate a random key for the encryption.
     // I'm using AES-GCM because it's the most secure algorithm we have. : )
@@ -64,15 +64,15 @@ export async function encrypt_and_decrypt_string() {
     const key = await cryption.aes.generate_key(256, true, "AES-GCM", ["encrypt", "decrypt"]);
 
     // We encrypt the data using the key.
-    const encrypted_data = await cryption.aes.encrypt(key, Buffer.from(data), "AES-GCM", iv);
+    const encrypted_data = await cryption.aes.encrypt(key, Buffer.from(data), iv);
 
     // This is now encrypted. Unless you have the key & IV both or 14 billion years, you can't decrypt it.
 
     // We will now decrypt the data using the key.
-    const decrypted_data = await cryption.aes.decrypt(key, encrypted_data, "AES-GCM", iv);
+    const decrypted_data = await cryption.aes.decrypt(key, encrypted_data, iv);
 
     // We convert the decrypted data to a string.
-    const decrypted_data_string = await cryption.helpers.buffer.to("utf8", decrypted_data);
+    const decrypted_data_string = await cryption.buffer.to("utf8", decrypted_data);
 
     // We compare the decrypted data with the original data.
     assert(decrypted_data_string === data); // If the strings match, the data is correct, you can use it.
@@ -96,7 +96,7 @@ export async function encrypt_and_decrypt_string_and_authenticate() {
 
     // We will also need an IV for this example.
     // IV stands for Initialization Vector.
-    const iv = await cryption.helpers.random.iv(96); // 96 bits = 12 bytes = 24 characters
+    const iv = await cryption.random.iv(96); // 96 bits = 12 bytes = 24 characters
 
     // We generate a random key for the encryption.
     // I'm using AES-GCM because it's the most secure algorithm we have. : )
@@ -107,21 +107,21 @@ export async function encrypt_and_decrypt_string_and_authenticate() {
     const authentication_key = await cryption.hmac.generate_key("SHA-256");
 
     // We encrypt the data using the encryption key.
-    const encrypted_data = await cryption.aes.encrypt(encryption_key, Buffer.from(data), "AES-GCM", iv);
+    const encrypted_data = await cryption.aes.encrypt(encryption_key, Buffer.from(data), iv);
 
     // We authenticate the data using the authentication key.
-    const authentication_tag = await cryption.signature.sign(authentication_key, Buffer.from(encrypted_data), "HMAC");
+    const authentication_tag = await cryption.signatures.sign(authentication_key, Buffer.from(encrypted_data), "HMAC");
 
     // This is now encrypted and authenticated. Unless you have the encryption key, authentication key and IV both or 14 billion years, you can't decrypt it.
 
     // We will now decrypt the data using the encryption key.
-    const decrypted_data = await cryption.aes.decrypt(encryption_key, encrypted_data, "AES-GCM", iv);
+    const decrypted_data = await cryption.aes.decrypt(encryption_key, encrypted_data, iv);
 
     // We convert the decrypted data to a string.
-    const decrypted_data_string = await cryption.helpers.buffer.to("utf8", decrypted_data);
+    const decrypted_data_string = await cryption.buffer.to("utf8", decrypted_data);
 
     // We authenticate the data using the authentication key.
-    const authentication_tag_of_decrypted_data = await cryption.signature.sign(authentication_key, Buffer.from(encrypted_data), "HMAC");
+    const authentication_tag_of_decrypted_data = await cryption.signatures.sign(authentication_key, Buffer.from(encrypted_data), "HMAC");
 
     // We compare the authentication tags.
     assert(authentication_tag === authentication_tag_of_decrypted_data); // If the authentication tags match, the data is correct, you can use it.

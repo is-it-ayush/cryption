@@ -6,12 +6,13 @@ import type { ExportKeyFormat, BufferConversion, Algorithm } from './utils.d';
  * @param key The key to use for the encryption. It must be a CryptoKey.
  * @param format The format of the key. It must be a string. You can choose between "spki" and "pkcs8" and "raw".
  * @returns A Promise with the exported key. It will be an ArrayBuffer.
+ * @throws A DOMException if the key is not extractable.
  */
 export async function exportKey(key: crypto.webcrypto.CryptoKey, format: ExportKeyFormat) {
   // If the key is not extractable, we can't export it
   if (!key.extractable) {
-    throw new Error(
-      "The key's are not extractable. If you want to export them, set the extractable flag to true while generating a Key Pair.",
+    throw new DOMException(
+      "@isitayush/cryption: The key's are not extractable. If you want to export them, set the extractable flag to true while generating a Key Pair.",
     );
   }
   const exportedKey = await window.crypto.subtle.exportKey(format, key);

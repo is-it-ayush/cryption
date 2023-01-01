@@ -1,3 +1,16 @@
+### 0.0.9-alpha
+
+- [x] Fixed the issue with the AES-GCM not working. Removed the need to specify algorithms in encrypt and decrypt functions. You can now just pass the key and the data to encrypt or decrypt. The library will automatically detect the algorithm and use it. : )
+- [x] Better Error Handling. Throws a DOMException if the key is invalid or the data is invalid instead of taking down the whole application. 
+- [x] Much clearer error messages.
+- [x] API Changes. Removed the `helpers` category. Instead everything is now in the `cryption` object.
+- [x] Updated `README.md` and `CHANGELOG.md` to reflect the changes. 
+- [x] Updated `/how-to-project/index.ts` to reflect the changes.
+
+### 0.0.8-alpha
+
+- [x] Minor changes.
+
 ### 0.0.7-alpha
 
 - [x] Fixed the issue where the library won't work due to API issue's.

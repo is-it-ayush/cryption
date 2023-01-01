@@ -69,7 +69,9 @@ export async function generate_rsa_oeap_key_pair(
   }
 
   if (!allowedRSAOEAPHashes.includes(hash)) {
-    throw new DOMException('The hash algorithm must be SHA-1, SHA-256, SHA-384 or SHA-512. You provided hash: ' + hash + '.');
+    throw new DOMException(
+      'The hash algorithm must be SHA-1, SHA-256, SHA-384 or SHA-512. You provided hash: ' + hash + '.',
+    );
   }
 
   const keyPair = await window.crypto.subtle.generateKey(

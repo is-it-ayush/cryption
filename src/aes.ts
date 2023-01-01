@@ -10,12 +10,7 @@ import { SymmetricAlgorithms } from './helpers/utils.d';
  * @returns A Promise with the encrypted data.
  * @throws A DOMException if the data is not valid for the operation or the key is not valid.
  */
-export async function encrypt(
-  key: crypto.webcrypto.CryptoKey,
-  data: Buffer,
-  iv?: ArrayBuffer,
-  counter?: ArrayBuffer,
-) {
+export async function encrypt(key: crypto.webcrypto.CryptoKey, data: Buffer, iv?: ArrayBuffer, counter?: ArrayBuffer) {
   // Validation of the parameters
   if (!key || !data) {
     throw new DOMException('You must provide a key and data to encrypt. There are missing parameters.');
@@ -50,13 +45,13 @@ export async function encrypt(
         data,
       );
     }
-  }
-  catch (error) {
+  } catch (error) {
     if (error instanceof DOMException) {
       if (error.name === 'OperationError') {
-        throw new DOMException('@isitayush/cryption: The data is not valid for the operation. It could be that the IV or counter is not the same, missing or of invalid length.');
-      }
-      else if (error.name === 'InvalidAccessError') {
+        throw new DOMException(
+          '@isitayush/cryption: The data is not valid for the operation. It could be that the IV or counter is not the same, missing or of invalid length.',
+        );
+      } else if (error.name === 'InvalidAccessError') {
         throw new DOMException('@isitayush/cryption: The key is not valid or the data could be corrupted.');
       }
     }
@@ -115,13 +110,13 @@ export async function decrypt(
         data,
       );
     }
-  }
-  catch (error) {
+  } catch (error) {
     if (error instanceof DOMException) {
       if (error.name === 'OperationError') {
-        throw new DOMException('@isitayush/cryption: The data is not valid for the operation. It could be that the IV or counter is not the same, missing or of invalid length.');
-      }
-      else if (error.name === 'InvalidAccessError') {
+        throw new DOMException(
+          '@isitayush/cryption: The data is not valid for the operation. It could be that the IV or counter is not the same, missing or of invalid length.',
+        );
+      } else if (error.name === 'InvalidAccessError') {
         throw new DOMException('@isitayush/cryption: The key is not valid or the data could be corrupted.');
       }
     }

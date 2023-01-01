@@ -9,7 +9,9 @@ import * as crypto from 'crypto';
  */
 export async function encrypt(key: crypto.webcrypto.CryptoKey, data: Buffer) {
   if (!data || !key) {
-    throw new DOMException('@isitayush/cryption: The are missing parameters. The key or data were not found as an argument. ');
+    throw new DOMException(
+      '@isitayush/cryption: The are missing parameters. The key or data were not found as an argument. ',
+    );
   }
 
   let encrypted = new ArrayBuffer(0);
@@ -21,13 +23,13 @@ export async function encrypt(key: crypto.webcrypto.CryptoKey, data: Buffer) {
       key,
       data,
     );
-  }
-  catch (error) {
+  } catch (error) {
     if (error instanceof DOMException) {
       if (error.name === 'OperationError') {
-        throw new DOMException('@isitayush/cryption: The data is not valid for the encryption operation or it could be corrupted.');
-      }
-      else if (error.name === 'InvalidAccessError') {
+        throw new DOMException(
+          '@isitayush/cryption: The data is not valid for the encryption operation or it could be corrupted.',
+        );
+      } else if (error.name === 'InvalidAccessError') {
         throw new DOMException('@isitayush/cryption: The key is not valid for the given data.');
       }
     }
@@ -44,7 +46,9 @@ export async function encrypt(key: crypto.webcrypto.CryptoKey, data: Buffer) {
  */
 export async function decrypt(key: crypto.webcrypto.CryptoKey, data: ArrayBuffer) {
   if (!data || !key) {
-    throw new DOMException('@isitayush/cryption: The are missing parameters. The key or data were not found as an argument. ');
+    throw new DOMException(
+      '@isitayush/cryption: The are missing parameters. The key or data were not found as an argument. ',
+    );
   }
 
   let decrypted = new ArrayBuffer(0);
@@ -56,13 +60,13 @@ export async function decrypt(key: crypto.webcrypto.CryptoKey, data: ArrayBuffer
       key,
       data,
     );
-  }
-  catch (error) {
+  } catch (error) {
     if (error instanceof DOMException) {
       if (error.name === 'OperationError') {
-        throw new DOMException('@isitayush/cryption: The data is not valid for the decryption operation or it could be corrupted.');
-      }
-      else if (error.name === 'InvalidAccessError') {
+        throw new DOMException(
+          '@isitayush/cryption: The data is not valid for the decryption operation or it could be corrupted.',
+        );
+      } else if (error.name === 'InvalidAccessError') {
         throw new DOMException('@isitayush/cryption: The key is not valid for the given data.');
       }
     }

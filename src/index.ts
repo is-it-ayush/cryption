@@ -70,17 +70,16 @@ class Cryption {
       symmetric: export_symmetric_key.bind(this),
       asymmetric: export_asymmetric_keys.bind(this),
     },
-  }
+  };
 
   public buffer = {
     to: convertFromTo.bind(this),
-  }
-
+  };
 
   public random = {
     iv: generate_iv.bind(this),
     salt: generate_salt.bind(this),
-  }
+  };
 
   private exportKey = convertFromTo.bind(this);
 }
@@ -90,9 +89,13 @@ const cryption = new Cryption();
 // Check if we're in a browser or in Node.js
 if (typeof global.window !== 'undefined') {
   if (global.window.location.protocol !== 'https:') {
-    throw new DOMException("@isitayush/cryption: The wrapper relies on `window.crypto.subtle` API which is only available in secure contexts i.e. HTTPS. Please make sure you're on HTTPS. If not, google how to switch to HTTPS for your framework.")
+    throw new DOMException(
+      "@isitayush/cryption: The wrapper relies on `window.crypto.subtle` API which is only available in secure contexts i.e. HTTPS. Please make sure you're on HTTPS. If not, google how to switch to HTTPS for your framework.",
+    );
   } else if (!global.window.crypto) {
-    throw new DOMException("@isitayush/cryption: The wrapper relies on `window.crypto.subtle` API which is not available in your browser. Please use a browser that supports this API.")
+    throw new DOMException(
+      '@isitayush/cryption: The wrapper relies on `window.crypto.subtle` API which is not available in your browser. Please use a browser that supports this API.',
+    );
   }
 }
 
